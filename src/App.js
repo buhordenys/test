@@ -1,24 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import TaskList from './Components/TaskList.js';
 import './App.css';
 
 function App() {
+    let arrNote = [
+        { id: 1, complete: false, title: 'note one'},
+        { id: 2, complete: false, title: 'note two'},
+        { id: 3, complete: false, title: 'note three'},
+    ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TaskList arrNote={arrNote}/>
     </div>
   );
 }
