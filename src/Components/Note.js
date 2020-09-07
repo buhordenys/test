@@ -1,6 +1,7 @@
 import React from "react";
 import List from "./List";
 
+//todo rename Note to Notes
 function Note() {
     let [arrNote, setArrNote] = React.useState([
         { id: 1, complete: false, title: 'note one'},
@@ -8,13 +9,13 @@ function Note() {
         { id: 3, complete: false, title: 'note three'},
     ]);
 
-    function swithTodo(id) {
+    function switchTodo(id) {
         setArrNote(
-            arrNote.map(() => {
-            if (arrNote.id === id) {
-                arrNote.complete = !arrNote.complete
-            }
-            return arrNote;
+            arrNote.map((note) => {
+                if (note.id === id) {
+                    note.complete = !note.complete
+                }
+                return note;
             })
         )
     }
@@ -22,7 +23,7 @@ function Note() {
     return (
         <div>
             <input className="noteInput" type="text"></input>
-            <List arrNote={arrNote} switch={swithTodo}/>
+            <List arrNote={arrNote} switch={switchTodo}/>
         </div>
     )
 }
