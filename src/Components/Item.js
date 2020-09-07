@@ -17,10 +17,21 @@ let styles = {
 }
 
 function Item({ todo, onChange}) {
+    let clases = []
+
+    if (todo.complete) {
+        clases.push('completedItem')
+    }
+
     return (
         <li style={styles.li}>
-            <span>
-                <input type="checkbox" style={styles.input} onChange={ () => onChange(todo.id)}/>
+            <span className={clases.join(' ')}>
+                <input
+                    type="checkbox"
+                    checked={todo.complete}
+                    style={styles.input}
+                    onChange={ () => onChange(todo.id)}
+                />
                 {todo.title}
             </span>
 

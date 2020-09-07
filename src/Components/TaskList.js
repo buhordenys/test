@@ -1,15 +1,15 @@
 import React from "react";
-import FormCategores from "./FormCategores";
+import FormCategories from "./FormCategories";
 
 function TaskList() {
     return (
-        <div className="FormCategores">
+        <div className="FormCategories">
             <span>
                 <h1>Add your to-do</h1>
                 <strong>What do you want to get done today?</strong>
             </span>
 
-            <FormCategores />
+            <FormCategories />
         </div>
     )
 }

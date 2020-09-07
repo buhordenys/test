@@ -1,16 +1,15 @@
 import React from "react";
-import Note from "./Note";
 
-function Category() {
+//todo Category -> SelectCategory
+function SelectCategory() {
     return (
         <div>
             <select /*onchange=""*/ >
                 <option>+add category...</option>
             </select>
-            <Note />
         </div>
 
     )
 }
 
-export default Category;
+export default SelectCategory;

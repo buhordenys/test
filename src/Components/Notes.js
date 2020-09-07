@@ -1,8 +1,8 @@
 import React from "react";
 import List from "./List";
 
-//todo rename Note to Notes
-function Note() {
+
+function Notes() {
     let [arrNote, setArrNote] = React.useState([
         { id: 1, complete: false, title: 'note one'},
         { id: 2, complete: false, title: 'note two'},
@@ -15,17 +15,30 @@ function Note() {
                 if (note.id === id) {
                     note.complete = !note.complete
                 }
+
                 return note;
             })
         )
     }
 
+    function clearTodo(id) {
+        setTimeout( () => {
+                setArrNote(
+                    arrNote.filter(note => note.id !== id)
+                );
+                console.log(arrNote)
+            },
+            5000)
+        console.log(arrNote)
+
+    }
+
     return (
         <div>
             <input className="noteInput" type="text"></input>
-            <List arrNote={arrNote} switch={switchTodo}/>
+            <List arrNote={arrNote} switch={switchTodo} clearArr={clearTodo}/>
         </div>
     )
 }
 
-export default Note;
+export default Notes;
