@@ -1,11 +1,15 @@
 import React from "react";
 import FormCategores from "./FormCategores";
 
-function TaskList(props) {
+function TaskList() {
     return (
-        <div class="FormCategores">
-            Task List
-            <FormCategores props={props}/>
+        <div className="FormCategores">
+            <span>
+                <h1>Add your to-do</h1>
+                <strong>What do you want to get done today?</strong>
+            </span>
+
+            <FormCategores />
         </div>
     )
 }

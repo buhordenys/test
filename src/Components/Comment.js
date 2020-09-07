@@ -2,7 +2,11 @@ import React from "react";
 
 function Comment() {
     return (
-        <input type="textarea" />
+        <span>
+            Comment
+            <input type="textarea"/>
+        </span>
+
     )
 }
 

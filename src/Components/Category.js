@@ -1,11 +1,13 @@
 import React from "react";
+import Note from "./Note";
 
 function Category() {
     return (
         <div>
             <select /*onchange=""*/ >
-                <option>value="+add category..."</option>
+                <option>+add category...</option>
             </select>
+            <Note />
         </div>
 
     )
