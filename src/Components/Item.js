@@ -31,7 +31,7 @@ function Item({ todo, onDelete, onCheck}) {
                     checked={todo.complete}
                     style={styles.input}
                     onChange={()=>{
-                        onCheck(todo.id);
+                        onCheck(todo.id)
                         onDelete(todo.id)
                         }
                     }
