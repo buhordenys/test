@@ -16,7 +16,7 @@ let styles = {
     }
 }
 
-function Item({ todo, onChange}) {
+function Item({ todo, onDelete, onCheck}) {
     let clases = []
 
     if (todo.complete) {
@@ -30,7 +30,11 @@ function Item({ todo, onChange}) {
                     type="checkbox"
                     checked={todo.complete}
                     style={styles.input}
-                    onChange={ () => onChange(todo.id)}
+                    onChange={()=>{
+                        onCheck(todo.id);
+                        onDelete(todo.id)
+                        }
+                    }
                 />
                 {todo.title}
             </span>

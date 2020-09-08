@@ -36,7 +36,7 @@ function Notes() {
     return (
         <div>
             <input className="noteInput" type="text"></input>
-            <List arrNote={arrNote} switch={switchTodo} clearArr={clearTodo}/>
+            <List arrNote={arrNote} сheckMark={switchTodo} cleanItem={clearTodo}/>
         </div>
     )
 }

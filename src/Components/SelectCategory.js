@@ -1,11 +1,18 @@
 import React from "react";
 
-//todo Category -> SelectCategory
 function SelectCategory() {
+    let arrCategory = [
+        {}
+    ]
+
+    function addSelectCategory() {
+
+    }
+
     return (
         <div>
             <select /*onchange=""*/ >
-                <option>+add category...</option>
+                <option onClick={addSelectCategory}>+add category...</option>
             </select>
         </div>
 

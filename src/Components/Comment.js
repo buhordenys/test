@@ -1,10 +1,12 @@
 import React from "react";
+import TextAreaComment from "./TextAreaComment";
 
-function Comment() {
+function Comment(props) {
     return (
         <span>
-            Comment
-            <input type="textarea"/>
+            <button className="comment" onClick={TextAreaComment}>
+                Comment
+            </button>
         </span>
 
     )

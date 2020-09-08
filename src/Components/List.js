@@ -13,7 +13,7 @@ function List(props) {
     return (
         <ul style={style.ul}>
             { props.arrNote.map(todo => {
-                return <Item todo={todo} key={todo.id} onChange={(props.switch, props.clearArr)}/>
+                return <Item todo={todo} key={todo.id} onDelete={props.cleanItem} onCheck={props.сheckMark}/>
             })}
         </ul>
     )
