@@ -14,7 +14,7 @@ function List(props) {
     return (
         <ul style={style.ul}>
             { props.todoes.map(todo => {
-                return <Item todo={todo} key={todo.id} onCheckMark={props.сheckMark}/>
+                return <Item todo={todo} key={todo.id} onCheckMark={props.сheckMark} getId={props.getId}/>
             })}
         </ul>
     )

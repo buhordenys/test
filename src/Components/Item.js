@@ -1,5 +1,6 @@
 import React from "react";
-import Comment from "./Comment";
+//import Comment from "./Comment";
+import TextAreaComment from "./TextAreaComment";
 
 let styles = {
     li: {
@@ -16,7 +17,7 @@ let styles = {
     }
 }
 
-function Item({ todo, onCheckMark}) {
+function Item({ todo, onCheckMark, getId}) {
     let clases = []
 
     if (todo.complete) {
@@ -35,7 +36,7 @@ function Item({ todo, onCheckMark}) {
                 {todo.title}
             </span>
 
-            <Comment todo={todo} />
+            <TextAreaComment todo={todo} getId={getId}/>
         </li>
     )
 }

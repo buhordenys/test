@@ -1,10 +1,10 @@
 import React from "react";
 import List from "./List";
-import InputNote from "./InputNote";
+import InputTodo from "./InputTodo";
 
 
 
-class Notes extends React.Component {
+class Todos extends React.Component {
     constructor(props) {
         super(props)
         this.id = 0
@@ -29,7 +29,8 @@ class Notes extends React.Component {
                     {
                         id: this.getId(),
                         complete: false,
-                        title: value}
+                        title: value
+                    }
                 ]
             })
     }
@@ -64,11 +65,11 @@ class Notes extends React.Component {
     render() {
         return (
             <div>
-                <InputNote addTodo={this.addTodo}/>
-                <List todoes={this.state.todoes} сheckMark={this.onChange} />
+                <InputTodo addTodo={this.addTodo}/>
+                <List todoes={this.state.todoes} сheckMark={this.onChange} getId={this.getId}/>
             </div>
         )
     }
 }
 
-export default Notes;
+export default Todos;

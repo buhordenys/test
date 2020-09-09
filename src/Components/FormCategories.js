@@ -1,13 +1,13 @@
 import React from "react";
 import SelectCategory from "./SelectCategory";
-import Notes from "./Notes";
+import Todos from "./Todos";
 
 
 function FormCategories() {
     return (
         <div>
             <SelectCategory />
-            <Notes />
+            <Todos />
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class InputNote extends React.Component {
+class InputTodo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,4 +30,4 @@ class InputNote extends React.Component {
     }
 }
 
-export default InputNote;
+export default InputTodo;
