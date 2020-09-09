@@ -12,8 +12,8 @@ let style = {
 function List(props) {
     return (
         <ul style={style.ul}>
-            { props.arrNote.map(todo => {
-                return <Item todo={todo} key={todo.id} onDelete={props.cleanItem} onCheck={props.сheckMark}/>
+            { props.todoes.map(todo => {
+                return <Item todo={todo} key={todo.id} onCheckMark={props.сheckMark}/>
             })}
         </ul>
     )
