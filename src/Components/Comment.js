@@ -1,10 +1,9 @@
 import React from "react";
-import TextAreaComment from "./TextAreaComment";
 
-function Comment(props) {
+function Comment(todo) {
     return (
         <span>
-            <button className="comment" onClick={TextAreaComment}>
+            <button className="comment" >
                 Comment
             </button>
         </span>

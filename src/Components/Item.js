@@ -35,7 +35,7 @@ function Item({ todo, onCheckMark}) {
                 {todo.title}
             </span>
 
-            <Comment />
+            <Comment todo={todo} />
         </li>
     )
 }

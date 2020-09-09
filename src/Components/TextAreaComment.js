@@ -1,18 +1,40 @@
 import React from 'react'
+import SelectCategory from "./SelectCategory";
 
-function TextAreaComment() {
-    let arrComment = [
-        {}
-    ]
-
-    function arrTextAreaComment() {
-        arrComment.push()
+class TextAreaComment extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            comments: [
+                {}
+            ]
+        }
     }
 
-    return <input
-        className="textAreaComment"
-        type="textarea"
-    />
+    //todo Как правильно передать фргументы из функции, которая в другой ветке, в класс?
+    arrTextAreaComment() {
+        let newArr = [...this.state.comments, {
+            id: this.state.comments.length + 1,
+            complete: true,
+            category: 'SelectCategory.arrCategory.category',
+            list: props.title,
+            value: '',
+        }]
+        this.setState({
+            comment: newArr
+        })
+    }
+
+    onBlur = function() {
+
+    }
+
+    render() {
+        return <textarea
+            className="textAreaComment"
+            onChange={this.onBlur}
+        />
+    }
 }
 
 

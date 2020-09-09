@@ -10,6 +10,7 @@ let style = {
 }
 
 function List(props) {
+    console.log(props.todoes)
     return (
         <ul style={style.ul}>
             { props.todoes.map(todo => {
