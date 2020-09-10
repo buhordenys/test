@@ -9,12 +9,31 @@ class Todos extends React.Component {
         super(props)
         this.id = 0
         this.state = {
-            todoes: [
-                { id: this.getId(), complete: false, title: 'note one'},
-                { id: this.getId(), complete: false, title: 'note two'},
-                { id: this.getId(), complete: false, title: 'note three'},
-            ],
+            todoes: {
+                [this.props.selectedCategory]:
+                    [
+                        { id: this.getId(), complete: false, title: 'note one'},
+                        { id: this.getId(), complete: false, title: 'note two'},
+                        { id: this.getId(), complete: false, title: 'note three'},
+                    ],
+            }
         }
+    }
+
+//todo перехватывает обновление, выбор категорий:
+    componentWillReceiveProps(props, context) {
+        this.setState(
+            {
+                todoes: {
+                    ...this.state.todoes,
+                    [props.selectedCategory]: []
+                }
+            }
+        )
+    }
+
+    selectTodosCategories = () => {
+        return this.state.todoes[this.props.selectedCategory]
     }
 
     getId = () => {
@@ -24,23 +43,27 @@ class Todos extends React.Component {
     addTodo = (value) => {
         this.setState(
             {
-                todoes: [
+                todoes: {
                     ...this.state.todoes,
-                    {
-                        id: this.getId(),
-                        complete: false,
-                        title: value
-                    }
-                ]
-            })
+                    [this.props.selectedCategory]:[
+                        ...this.state.todoes[this.props.selectedCategory],
+                        {
+                            id: this.getId(),
+                            complete: false,
+                            title: value
+                        }
+                    ]
+                }
+            }
+        )
     }
 
     filterTodoes = (id) => {
-        return this.state.todoes.filter(note => note.id !== id)
+        return this.state.todoes[this.props.selectedCategory].filter(note => note.id !== id)
     }
 
     mapTodoes = (id) => {
-        return this.state.todoes.map((note) => {
+        return this.state.todoes[this.props.selectedCategory].map((note) => {
             if(note.id === id) {
                 note.complete = !note.complete
             }
@@ -50,23 +73,33 @@ class Todos extends React.Component {
 
     onChange = (id) => {
         this.setState({
-            todoes: this.mapTodoes(id)
+            todoes: {
+                ...this.state.todoes,
+                [this.props.selectedCategory]:this.mapTodoes(id)
+            }
         },
             () => {
             setTimeout(() => {
                 this.setState({
-                    todoes: this.filterTodoes(id)
+                    todoes: {
+                        ...this.state.todoes,
+                        [this.props.selectedCategory]: this.filterTodoes(id)
+                    }
                 })
             }, 5000)
             }
         )
     }
-//todo change all note(s) -> todo(es)
+
     render() {
+        console.log(this.state.todoes)
         return (
             <div>
                 <InputTodo addTodo={this.addTodo}/>
-                <List todoes={this.state.todoes} сheckMark={this.onChange} getId={this.getId}/>
+                <List
+                    todoes={this.selectTodosCategories()}
+                    сheckMark={this.onChange}
+                    getId={this.getId}/>
             </div>
         )
     }

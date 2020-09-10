@@ -1,22 +1,50 @@
 import React from "react";
 
-function SelectCategory() {
-    let arrCategory = [
-        {id: 1, selectede: false, category: ''}
-    ]
 
-    function addSelectCategory() {
-
+class SelectCategory extends React.Component {
+    constructor(props) {
+        super(props)
+        this.id = 0
+        this.state = {
+            categories:  ['Home', 'Work']
+        }
     }
 
-    return (
-        <div>
-            <select /*onchange=""*/ >
-                <option onClick={addSelectCategory()}>+add category...</option>
-            </select>
-        </div>
+    getId = () => {
+        return ++this.id
+    }
 
-    )
+    addCategory = (value) => {
+        this.setState(
+            {
+                categories: [
+                    ...this.state.todoes,
+                    {
+                        id: this.getId(),
+                        selected: false,
+                        category: value
+                    }
+                ]
+            })
+    }
+
+
+    render() {
+        return (
+            <div>
+                <select onChange={this.props.selectCategory}>
+                    {
+                        this.state.categories.map( (category) => {
+                                return (
+                                    <option value={category}>{category}</option>
+                                )
+                            }
+                        )
+                    }
+                </select>
+            </div>
+        )
+    }
 }
 
 export default SelectCategory;

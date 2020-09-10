@@ -1,21 +1,18 @@
 import React from 'react'
 import SelectCategory from "./SelectCategory";
 
-/*let style = {
+let style = {
     see: { display: 'block' },
-
     hide: { display: 'none' }
-}*/
+}
 
 
 class TextAreaComment extends React.Component {
     constructor(props) {
         super(props)
-        this.hide = 'none'
         this.state = {
             comments: [],
         }
-        console.log(this.state)
     }
 
     inputComment = (value) => {
@@ -35,11 +32,11 @@ class TextAreaComment extends React.Component {
     }
 
     onBlur = function() {
-        if (this.hide == 'none') {
-            this.hide === 'block'
-        } else {
-            this.hide === 'none'
-        }
+        /*if (style.hide) {
+            style.see
+        } else if (style.see) {
+            style.hide
+        }*/
     }
 
     render() {
@@ -51,7 +48,7 @@ class TextAreaComment extends React.Component {
                 <textarea
                     className="textAreaComment"
                     onChange={this.inputComment}
-                    style={display:this.hide}
+                    style={style.hide}
                 />
             </div>
         )

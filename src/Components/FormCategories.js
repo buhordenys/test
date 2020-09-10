@@ -3,13 +3,28 @@ import SelectCategory from "./SelectCategory";
 import Todos from "./Todos";
 
 
-function FormCategories() {
-    return (
-        <div>
-            <SelectCategory />
-            <Todos />
-        </div>
-    )
+class FormCategories extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectedCategory: ''
+        }
+    }
+   selectCategory = (event) => {
+        this.setState (
+            {
+            selectedCategory: event.target.value
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <SelectCategory selectCategory={this.selectCategory}/>
+                <Todos selectedCategory={this.state.selectedCategory}/>
+            </div>
+        )
+    }
 }
 
 export default FormCategories;
