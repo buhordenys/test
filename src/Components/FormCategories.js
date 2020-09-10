@@ -7,7 +7,7 @@ class FormCategories extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedCategory: ''
+            selectedCategory: 'Home'
         }
     }
    selectCategory = (event) => {

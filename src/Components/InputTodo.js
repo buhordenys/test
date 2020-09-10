@@ -18,12 +18,17 @@ class InputTodo extends React.Component {
 
     onClick = () => {
         this.props.addTodo(this.state.value);
+        this.setState(
+            {
+                value: ''
+            }
+        )
     }
 
     render() {
         return(
             <div>
-                <input onChange={this.onChange} />
+                <input onChange={this.onChange} value={this.state.value}/>
                 <button onClick={this.onClick} > ADD... </button>
             </div>
         )

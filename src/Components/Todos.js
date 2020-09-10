@@ -22,14 +22,22 @@ class Todos extends React.Component {
 
 //todo перехватывает обновление, выбор категорий:
     componentWillReceiveProps(props, context) {
-        this.setState(
-            {
-                todoes: {
-                    ...this.state.todoes,
-                    [props.selectedCategory]: []
+        if (!this.howUseCategory(props.selectedCategory)) {
+            this.setState(
+                {
+                    todoes: {
+                        ...this.state.todoes,
+                        [props.selectedCategory]: []
+                    }
                 }
-            }
-        )
+            )
+        }
+    }
+
+    howUseCategory(el) {
+        let arrCategorise = Object.keys(this.state.todoes).valueOf()
+        console.log(arrCategorise, el)
+        return arrCategorise.find(item => item == el);
     }
 
     selectTodosCategories = () => {
@@ -56,6 +64,7 @@ class Todos extends React.Component {
                 }
             }
         )
+
     }
 
     filterTodoes = (id) => {
@@ -92,7 +101,6 @@ class Todos extends React.Component {
     }
 
     render() {
-        console.log(this.state.todoes)
         return (
             <div>
                 <InputTodo addTodo={this.addTodo}/>
