@@ -13,7 +13,7 @@ class FormCategories extends React.Component {
     }
 
    selectCategory = (event) => {
-       if (event.target.value == 'Add your Category') {
+       if (event.target.value === '+ add your category') {
            console.log(event.target.value)
            return this.newCat = prompt('Add your new Category: ')
 

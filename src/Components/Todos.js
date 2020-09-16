@@ -38,7 +38,7 @@ class Todos extends React.Component {
     howUseCategory(el) {
         let arrCategorise = Object.keys(this.state.todoes).valueOf()
         console.log(arrCategorise, el)
-        return arrCategorise.find(item => item == el);
+        return arrCategorise.find(item => item === el);
     }
 
     selectTodosCategories = () => {

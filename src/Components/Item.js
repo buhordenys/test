@@ -3,15 +3,6 @@ import React from "react";
 import TextAreaComment from "./TextAreaComment";
 
 let styles = {
-    li: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '.5rem 1rem',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        marginBottom: '.5rem',
-    },
     input: {
         marginRight: '1rem',
     }
@@ -25,7 +16,7 @@ function Item({ todo, onCheckMark, getId}) {
     }
 
     return (
-        <li style={styles.li}>
+        <li className='listLi'>
             <span className={clases.join(' ')}>
                 <input
                     type="checkbox"

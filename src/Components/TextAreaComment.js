@@ -1,5 +1,4 @@
 import React from 'react'
-import SelectCategory from "./SelectCategory";
 
 let style = {
     see: { display: 'block' },

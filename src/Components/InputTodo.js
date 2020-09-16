@@ -27,9 +27,10 @@ class InputTodo extends React.Component {
 
     render() {
         return(
-            <div>
-                <input onChange={this.onChange} value={this.state.value}/>
-                <button onClick={this.onClick} > ADD... </button>
+            <div className='formAddTodo'>
+                <input onChange={this.onChange} value={this.state.value} className='inputTodo'/>
+                <i className='iconInputTodo' />
+                <button onClick={this.onClick} className='buttonAddTodo'> ADD </button>
             </div>
         )
     }
