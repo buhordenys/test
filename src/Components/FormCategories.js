@@ -6,7 +6,6 @@ import Todos from "./Todos";
 class FormCategories extends React.Component {
     constructor(props) {
         super(props)
-        this.newCat = ''
         this.state = {
             selectedCategory: 'Home'
         }
@@ -15,7 +14,10 @@ class FormCategories extends React.Component {
    selectCategory = (event) => {
        if (event.target.value === '+ add your category') {
            console.log(event.target.value)
-           return this.newCat = prompt('Add your new Category: ')
+           return this.setState (
+               {
+                   selectedCategory: this.newCat = prompt('Add your new Category: ')
+               })
 
            //todo выводит prompt в котором вводиться категория, при нажатии:
            // "Ок" -> передаеться value SelectCategory.js в функцию, которая добавляет в this.state.category элемент массива со значением value

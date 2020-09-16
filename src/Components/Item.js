@@ -2,12 +2,6 @@ import React from "react";
 //import Comment from "./Comment";
 import TextAreaComment from "./TextAreaComment";
 
-let styles = {
-    input: {
-        marginRight: '1rem',
-    }
-}
-
 function Item({ todo, onCheckMark, getId}) {
     let clases = []
 
@@ -21,8 +15,8 @@ function Item({ todo, onCheckMark, getId}) {
                 <input
                     type="checkbox"
                     checked={todo.complete}
-                    style={styles.input}
                     onChange={()=>{onCheckMark(todo.id)}}
+                    className='checkboxLi'
                 />
                 {todo.title}
             </span>

@@ -6,7 +6,7 @@ class SelectCategory extends React.Component {
         super(props)
         this.id = 0
         this.state = {
-            categories:  ['+ add your category', 'Home', 'Work', this.props.newCat]
+            categories:  ['+ add your category', 'Home', 'Work']
         }
     }
 
@@ -33,7 +33,7 @@ class SelectCategory extends React.Component {
                         this.state.categories.map( (category) => {
                                 return (
                                     <>
-                                    <option value={category}>{category}</option>
+                                    <option  value={category}>{category}</option>
                                     </>
                                 )
                             }
