@@ -6,7 +6,7 @@ class SelectCategory extends React.Component {
         super(props)
         this.id = 0
         this.state = {
-            categories:  ['Home', 'Work']
+            categories:  ['+ add your category', 'Home', 'Work']
         }
     }
 
@@ -18,12 +18,8 @@ class SelectCategory extends React.Component {
         this.setState(
             {
                 categories: [
-                    ...this.state.todoes,
-                    {
-                        id: this.getId(),
-                        selected: false,
-                        category: value
-                    }
+                    ...this.state.categories,
+                    value
                 ]
             })
     }
@@ -36,7 +32,9 @@ class SelectCategory extends React.Component {
                     {
                         this.state.categories.map( (category) => {
                                 return (
+                                    <>
                                     <option value={category}>{category}</option>
+                                    </>
                                 )
                             }
                         )
