@@ -31,11 +31,19 @@ class SelectCategory extends React.Component {
                 <select onChange={this.props.selectCategory} className='selectCategory'>
                     {
                         this.state.categories.map( (category) => {
-                                return (
-                                    <>
-                                    <option  value={category}>{category}</option>
-                                    </>
-                                )
+                                if (category) {
+                                    return (
+                                        <>
+                                            <option value={category}>{category}</option>
+                                        </>
+                                    )
+                                } else {
+                                    return (
+                                        <>
+                                            <option value={category}>{this.addCategory(category)}</option>
+                                        </>
+                                    )
+                                }
                             }
                         )
                     }

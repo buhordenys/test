@@ -172,11 +172,33 @@ h1 {
   padding: .2rem 1rem;
   margin: 0 15px .5rem 15px;
 
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 2px;
+  box-shadow:
+          inset 0 0 5px rgba(0,0,0,0.1);
+  background: #f9f9f9;
+  color: #777;
+  transition: color 0.3s ease-out;
 }
 
 .checkboxLi {
   margin-right: 1rem;
   border-radius: 5px;
+}
+
+.buttonComment {
+  border: none;
+  background-color: unset;
+  color: green;
+  font-size: 13px;
+}
+
+.buttonComment:hover {
+  color: dodgerblue;
+}
+
+.buttonComment:focus {
+  outline: none;
+  transition: All 0.5s ease;
+  color: dodgerblue;
 }
