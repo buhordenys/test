@@ -3,7 +3,6 @@ import Item from "./Item";
 
 
 function List(props) {
-    console.log(props.todoes)
     return (
         <ul className='listUl'>
             { props.todoes.map(todo => {

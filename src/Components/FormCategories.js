@@ -34,7 +34,7 @@ class FormCategories extends React.Component {
     render() {
         return (
             <div>
-                <SelectCategory selectCategory={this.selectCategory} newCat={this.newCat}/>
+                <SelectCategory selectCategory={this.selectCategory} newCat={this.state.selectedCategory} />
                 <Todos selectedCategory={this.state.selectedCategory}/>
             </div>
         )

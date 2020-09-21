@@ -43,9 +43,6 @@ class TextAreaComment extends React.Component {
 }
 
 function SetComment({isOpen, valueComment, thisId, addCommemt}) {
-        console.log(valueComment)
-            console.log(thisId)
-
     if (isOpen) {
         return <textarea
                 value={valueComment}

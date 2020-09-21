@@ -86,12 +86,8 @@ class Todos extends React.Component {
     }
 
     mapTodoesComment = (id, value) => {
-        console.log(id)
-        console.log(this.state.todoes[this.props.selectedCategory])
         return this.state.todoes[this.props.selectedCategory].map((note) => {
-            console.log(note)
             if (note.id === id) {
-                console.log(note.id, id)
 
                 note.valueComment = value
             }

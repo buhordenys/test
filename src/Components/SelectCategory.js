@@ -6,7 +6,11 @@ class SelectCategory extends React.Component {
         super(props)
         this.id = 0
         this.state = {
-            categories:  ['+ add your category', 'Home', 'Work']
+            categories:  [
+                {id: this.id, title:'+ add your category'},
+                {id: this.id, title:'Home'},
+                {id: this.id, title:'Work'}
+                ]
         }
     }
 
@@ -19,7 +23,10 @@ class SelectCategory extends React.Component {
             {
                 categories: [
                     ...this.state.categories,
-                    value
+                    {
+                        id: this.id,
+                        title: value
+                    }
                 ]
             })
     }
@@ -31,16 +38,16 @@ class SelectCategory extends React.Component {
                 <select onChange={this.props.selectCategory} className='selectCategory'>
                     {
                         this.state.categories.map( (category) => {
-                                if (category) {
+                                if (category.title) {
                                     return (
                                         <>
-                                            <option value={category}>{category}</option>
+                                            <option value={category.title}>{category.title}</option>
                                         </>
                                     )
                                 } else {
                                     return (
                                         <>
-                                            <option value={category}>{this.addCategory(category)}</option>
+                                            <option value={category.title}>{this.addCategory(category.title)}</option>
                                         </>
                                     )
                                 }
