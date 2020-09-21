@@ -21,7 +21,7 @@ class FormCategories extends React.Component {
 
            //todo выводит prompt в котором вводиться категория, при нажатии:
            // "Ок" -> передаеться value SelectCategory.js в функцию, которая добавляет в this.state.category элемент массива со значением value
-           // "Отмена" -> evevnt = 'Home'
+           // "Отмена" -> event = 'Home'
        } else {
                this.setState (
                    {

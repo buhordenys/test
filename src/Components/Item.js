@@ -1,5 +1,4 @@
 import React from "react";
-//import Comment from "./Comment";
 import TextAreaComment from "./TextAreaComment";
 
 function Item({ todo, onCheckMark, getId}) {
@@ -8,6 +7,7 @@ function Item({ todo, onCheckMark, getId}) {
     if (todo.complete) {
         clases.push('completedItem')
     }
+    console.log(todo)
 
     return (
         <li className='listLi'>
@@ -21,7 +21,7 @@ function Item({ todo, onCheckMark, getId}) {
                 {todo.title}
             </span>
 
-            <TextAreaComment todo={todo} getId={getId}/>
+            <TextAreaComment valueComment={todo.valueComment} getId={getId}/>
         </li>
     )
 }

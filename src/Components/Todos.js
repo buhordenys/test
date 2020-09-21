@@ -12,9 +12,9 @@ class Todos extends React.Component {
             todoes: {
                 [this.props.selectedCategory]:
                     [
-                        { id: this.getId(), complete: false, title: 'note one'},
-                        { id: this.getId(), complete: false, title: 'note two'},
-                        { id: this.getId(), complete: false, title: 'note three'},
+                        { id: this.getId(), complete: false, title: 'note one', valueComment: ''},
+                        { id: this.getId(), complete: false, title: 'note two', valueComment: ''},
+                        { id: this.getId(), complete: false, title: 'note three', valueComment: ''},
                     ],
             }
         }
@@ -60,7 +60,8 @@ class Todos extends React.Component {
                         {
                             id: this.getId(),
                             complete: false,
-                            title: value
+                            title: value,
+                            valueComment: ''
                         }
                     ]
                 }
