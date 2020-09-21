@@ -30,18 +30,26 @@ class TextAreaComment extends React.Component {
         return (
             <div>
                 {button}
-                <SetComment isOpen={isOpen} />
+                <SetComment
+                    isOpen={isOpen}
+                    valueComment={this.props.thisTodo.valueComment}
+                    thisId={this.props.thisTodo.id}
+                    addCommemt={this.props.selectComment}
+                />
             </div>
         )
     }
 
 }
 
-function SetComment({isOpen, valueComment}) {
-    console.log(valueComment)
+function SetComment({isOpen, valueComment, thisId, addCommemt}) {
+        console.log(valueComment)
+            console.log(thisId)
+
     if (isOpen) {
         return <textarea
                 value={valueComment}
+                onChange={(event)=> addCommemt(thisId, event.target.value)}
                 className="textAreaComment"
             >{valueComment}</textarea>
     }

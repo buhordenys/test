@@ -12,7 +12,7 @@ class Todos extends React.Component {
             todoes: {
                 [this.props.selectedCategory]:
                     [
-                        { id: this.getId(), complete: false, title: 'note one', valueComment: ''},
+                        { id: this.getId(), complete: false, title: 'note one', valueComment: 'test'},
                         { id: this.getId(), complete: false, title: 'note two', valueComment: ''},
                         { id: this.getId(), complete: false, title: 'note three', valueComment: ''},
                     ],
@@ -37,7 +37,6 @@ class Todos extends React.Component {
     //todo сравнение есть ли такая же категория, какую мы выбрали в FormCategories.js, в нашем стайте или нет
     howUseCategory(el) {
         let arrCategorise = Object.keys(this.state.todoes).valueOf()
-        console.log(arrCategorise, el)
         return arrCategorise.find(item => item === el);
     }
 
@@ -86,6 +85,20 @@ class Todos extends React.Component {
         })
     }
 
+    mapTodoesComment = (id, value) => {
+        console.log(id)
+        console.log(this.state.todoes[this.props.selectedCategory])
+        return this.state.todoes[this.props.selectedCategory].map((note) => {
+            console.log(note)
+            if (note.id === id) {
+                console.log(note.id, id)
+
+                note.valueComment = value
+            }
+            return note
+        })
+    }
+
     //todo функция, которая объеденила filterTodoes и mapTodoes. Ее же собственно и передаем дочерним компонентам
     onChange = (id) => {
         this.setState({
@@ -107,6 +120,15 @@ class Todos extends React.Component {
         )
     }
 
+    addComment = (id, value) => {
+        this.setState({
+            todoes: {
+                ...this.state.todoes,
+                [this.props.selectedCategory]: this.mapTodoesComment(id, value)
+            }
+        })
+    }
+
     render() {
         return (
             <div>
@@ -114,7 +136,8 @@ class Todos extends React.Component {
                 <List
                     todoes={this.selectTodosCategories()}
                     сheckMark={this.onChange}
-                    getId={this.getId}/>
+                    addComment={this.addComment}
+                />
             </div>
         )
     }
