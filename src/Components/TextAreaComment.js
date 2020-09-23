@@ -24,13 +24,14 @@ class TextAreaComment extends React.Component {
         if (isOpen) {
             button = <CommentoutButton onClick={this.textareaOff} />;
         } else {
-            button = <CommentButton onClick={this.textareaOn} />;
+            button = <CommentButton onClick={this.textareaOn} valueComment={this.props.thisTodo.valueComment}/>;
         }
 
         return (
             <div>
                 {button}
                 <SetComment
+                    textareaOff={this.textareaOff}
                     isOpen={isOpen}
                     valueComment={this.props.thisTodo.valueComment}
                     thisId={this.props.thisTodo.id}
@@ -42,9 +43,11 @@ class TextAreaComment extends React.Component {
 
 }
 
-function SetComment({isOpen, valueComment, thisId, addCommemt}) {
+function SetComment({textareaOff, isOpen, valueComment, thisId, addCommemt}) {
     if (isOpen) {
+
         return <textarea
+                onBlur={textareaOff}
                 value={valueComment}
                 onChange={(event)=> addCommemt(thisId, event.target.value)}
                 className="textAreaComment"
@@ -62,8 +65,9 @@ function CommentoutButton(props) {
 }
 
 function CommentButton(props) {
+    console.log(props.valueComment)
     return (
-        <button className="buttonComment" onClick={props.onClick}>
+        <button className={props.valueComment.length > 0  ? 'buttonCommentOut' : 'buttonComment'} onClick={props.onClick}>
             Comment
         </button>
     )

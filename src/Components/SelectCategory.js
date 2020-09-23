@@ -7,9 +7,9 @@ class SelectCategory extends React.Component {
         this.id = 0
         this.state = {
             categories:  [
-                {id: this.id, title:'+ add your category'},
-                {id: this.id, title:'Home'},
-                {id: this.id, title:'Work'}
+                {id: this.getId(), title:'+ add your category'},
+                {id: this.getId(), title:'Home'},
+                {id: this.getId(), title:'Work'}
                 ]
         }
     }
@@ -18,39 +18,46 @@ class SelectCategory extends React.Component {
         return ++this.id
     }
 
-    addCategory = (value) => {
-        this.setState(
-            {
-                categories: [
-                    ...this.state.categories,
-                    {
-                        id: this.id,
-                        title: value
-                    }
-                ]
-            })
+    addCategory = (event) => {
+        const value = event.target.value
+        if (value === '+ add your category') {
+            const newCat = prompt('Add your new Category: ')
+            this.setState(
+                {
+                    categories: [
+                        ...this.state.categories,
+                        {
+                            id: this.getId(),
+                            title: newCat,
+                        }
+                    ]
+                }, () => this.props.selectCategory(newCat))
+        } else {
+            this.props.selectCategory(value)
+        }
     }
 
 
     render() {
+        console.log(22)
         return (
             <div>
-                <select onChange={this.props.selectCategory} className='selectCategory'>
+                <select
+                    value={this.props.newCat}
+                    onChange={this.addCategory}
+                    className='selectCategory'
+                >
                     {
                         this.state.categories.map( (category) => {
-                                if (category.title) {
-                                    return (
-                                        <>
-                                            <option value={category.title}>{category.title}</option>
-                                        </>
-                                    )
-                                } else {
-                                    return (
-                                        <>
-                                            <option value={category.title}>{this.addCategory(category.title)}</option>
-                                        </>
-                                    )
-                                }
+                            console.log(category)
+                                return (
+                                    <option
+                                        key={category.id}
+                                        value={category.title}
+                                    >
+                                        {category.title}
+                                    </option>
+                                )
                             }
                         )
                     }

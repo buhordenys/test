@@ -11,23 +11,12 @@ class FormCategories extends React.Component {
         }
     }
 
-   selectCategory = (event) => {
-       if (event.target.value === '+ add your category') {
-           console.log(event.target.value)
-           return this.setState (
-               {
-                   selectedCategory: this.newCat = prompt('Add your new Category: ')
-               })
-
-           //todo выводит prompt в котором вводиться категория, при нажатии:
-           // "Ок" -> передаеться value SelectCategory.js в функцию, которая добавляет в this.state.category элемент массива со значением value
-           // "Отмена" -> event = 'Home'
-       } else {
-               this.setState (
-                   {
-                       selectedCategory: event.target.value
-                   })
-       }
+   selectCategory = (value) => {
+       this.setState (
+           {
+               selectedCategory: value
+           }
+       )
     }
 
 
