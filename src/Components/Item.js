@@ -1,5 +1,7 @@
 import React from "react";
 import TextAreaComment from "./TextAreaComment";
+import EditIcon from '@material-ui/icons/Edit';
+
 
 function Item({ todo, onCheckMark, selectComment}) {
     let clases = []
@@ -11,6 +13,7 @@ function Item({ todo, onCheckMark, selectComment}) {
     return (
         <li className='listLi'>
             <span className={clases.join(' ')}>
+                <EditIcon fontSize="inherit"/>
                 <input
                     type="checkbox"
                     checked={todo.complete}
