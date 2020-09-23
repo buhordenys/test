@@ -1,4 +1,5 @@
 import React from 'react';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 
 class InputTodo extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class InputTodo extends React.Component {
         return(
             <div className='formAddTodo'>
                 <input onChange={this.onChange} value={this.state.value} className='inputTodo'/>
-                <i className='iconInputTodo' />
+                <NoteAddIcon className='iconInputTodo' fontSize="small" />
                 <button onClick={this.onClick} className='buttonAddTodo'> ADD </button>
             </div>
         )

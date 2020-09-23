@@ -28,6 +28,7 @@ h1 {
 
 .completedItem {
   text-decoration: line-through;
+  color: #f50057;
 }
 
 .logoTodo {
@@ -35,6 +36,14 @@ h1 {
   width: 5%;
 
   margin: 20px 0 0 0;
+}
+
+.spanCategory {
+
+  display: flex;
+  justify-content: center;
+
+  position: center;
 }
 
 .formCategories {
@@ -97,7 +106,7 @@ h1 {
 
 .iconInputTodo {
   left: 14px;
-  top: 10px;
+  top: 12.5px;
   position: absolute;
   height: 25px;
   width: 25px;
@@ -106,7 +115,6 @@ h1 {
   box-shadow: 1px 0 0 rgba(255, 255, 255, 0.7);
 
   color: #777777;
-  //background-color: red;
   text-align: center;
   line-height: 42px;
   transition: all 0.3s ease-out;
