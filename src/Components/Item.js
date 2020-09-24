@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 
-function Item({ todo, onCheckMark, selectComment}) {
+function Item({ todo, onCheckMark, selectComment, editTodo}) {
     let classes = []
 
     if (todo.complete) {
@@ -32,9 +32,10 @@ function Item({ todo, onCheckMark, selectComment}) {
                     className="edit"
                     size="small"
                     startIcon={<EditIcon fontSize="inherit"/>}
+                    onClick={() => editTodo(todo.title)} //todo ч-з функцию при клике вкл/выкл редактирование текстового окна ниже
                 />
 
-              {todo.title}
+                {todo.title} //todo текстовое окно с @material-ui/core, которое имеет тумблер (контролированный едитом)
             </span>
 
             <TextAreaComment selectComment={selectComment} thisTodo={todo}/>
