@@ -1,6 +1,7 @@
 import React from "react";
 import FormCategories from "./FormCategories";
 import image from "../image/logoTodo.jpg";
+import Paper from '@material-ui/core/Paper';
 
 
 //todo не могу понять, как добавить картинку в проект

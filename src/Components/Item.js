@@ -4,10 +4,14 @@ import Checkbox from "@material-ui/core/Checkbox";
 import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+//import { makeStyles } from '@material-ui/core/styles';
 
 
 function Item({ todo, onCheckMark, selectComment, editTodo}) {
     let classes = []
+
+    let read = false
 
     if (todo.complete) {
         classes.push('completedItem')
@@ -18,6 +22,12 @@ function Item({ todo, onCheckMark, selectComment, editTodo}) {
             minWidth: 25,
         }
     })(Button)
+
+    /*const StyleTextField = makeStyles({
+        root: {
+            width: 100
+        }
+    })(TextField)*/
 
     return (
         <li className='listLi'>
@@ -32,11 +42,25 @@ function Item({ todo, onCheckMark, selectComment, editTodo}) {
                     className="edit"
                     size="small"
                     startIcon={<EditIcon fontSize="inherit"/>}
-                    onClick={() => editTodo(todo.title)} //todo ч-з функцию при клике вкл/выкл редактирование текстового окна ниже
-                />
+                    onClick={() => {
+                        read = !read;
+                    }} //todo ч-з функцию при клике вкл/выкл редактирование текстового окна ниже
 
-                {todo.title} //todo текстовое окно с @material-ui/core, которое имеет тумблер (контролированный едитом)
+                    //todo текстовое окно с @material-ui/core, которое имеет тумблер (контролированный едитом)
+                />
+                <TextField
+                    placeholder="You didn't input note"
+                    id="standard-read-only-input"
+                    multiline="true"
+                    onChange={(event)=> editTodo(todo.id, event.target.value)}
+                    defaultValue={todo.title}
+                    InputProps={{
+                        readOnly: read,
+                        focused: true
+                    }}
+                />
             </span>
+
 
             <TextAreaComment selectComment={selectComment} thisTodo={todo}/>
         </li>

@@ -7,9 +7,9 @@ class SelectCategory extends React.Component {
         this.id = 0
         this.state = {
             categories:  [
-                {id: this.getId(), title:'+ add your category'},
-                {id: this.getId(), title:'Home'},
-                {id: this.getId(), title:'Work'}
+                    {id: this.getId(), title:'+ add your category'},
+                    {id: this.getId(), title:'Home'},
+                    {id: this.getId(), title:'Work'}
                 ]
         }
     }
@@ -39,7 +39,6 @@ class SelectCategory extends React.Component {
 
 
     render() {
-        console.log(22)
         return (
             <div>
                 <select
@@ -49,7 +48,6 @@ class SelectCategory extends React.Component {
                 >
                     {
                         this.state.categories.map( (category) => {
-                            console.log(category)
                                 return (
                                     <option
                                         key={category.id}

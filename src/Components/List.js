@@ -11,6 +11,7 @@ function List(props) {
                     key={todo.id}
                     onCheckMark={props.сheckMark}
                     selectComment={props.addComment}
+                    editTodo={props.mapEditComment}
                     getId={props.getId}
                 />
             })}

@@ -88,8 +88,16 @@ class Todos extends React.Component {
     mapTodoesComment = (id, value) => {
         return this.state.todoes[this.props.selectedCategory].map((note) => {
             if (note.id === id) {
-
                 note.valueComment = value
+            }
+            return note
+        })
+    }
+
+    mapEditComment = (id, value) => {
+        return this.state.todoes[this.props.selectedCategory].map((note) => {
+            if (note.id === id) {
+                note.title = value
             }
             return note
         })
@@ -111,7 +119,7 @@ class Todos extends React.Component {
                         [this.props.selectedCategory]: this.filterTodoes(id)
                     }
                 })
-            }, 10000)
+            }, 5000)
             }
         )
     }
@@ -133,6 +141,7 @@ class Todos extends React.Component {
                     todoes={this.selectTodosCategories()}
                     сheckMark={this.onChange}
                     addComment={this.addComment}
+                    mapEditComment={this.mapEditComment}
                 />
             </div>
         )
