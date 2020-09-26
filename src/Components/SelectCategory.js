@@ -32,11 +32,22 @@ class SelectCategory extends React.Component {
                         }
                     ]
                 }, () => this.props.selectCategory(newCat))
+        } else if (value === 'delete') {
+            const question = window.confirm("Do you really wont delete category?")
+            if (question) {
+                this.setState(
+                    {
+                        categories: [
+                            ...this.state.categories,
+                            this.state.categories.filter(note => note.title !== value)
+                        ]
+                    }, () => this.props.selectCategory('Home')
+                )
+            }
         } else {
             this.props.selectCategory(value)
         }
     }
-
 
     render() {
         return (

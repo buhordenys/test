@@ -1,8 +1,18 @@
 import React from "react";
 import SelectCategory from "./SelectCategory";
 import Todos from "./Todos";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
+import {withStyles} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
+
+const StyleButton = withStyles({
+    root: {
+        minWidth: 25,
+        textTransform: "none",
+        paddingLeft: 8,
+    }
+})(Button)
 
 class FormCategories extends React.Component {
     constructor(props) {
@@ -20,16 +30,28 @@ class FormCategories extends React.Component {
        )
     }
 
+    /*
+
+    */
+
 
     render() {
         return (
             <div>
                 <span className="spanCategory">
-                    <MoreVertIcon/>
                     <SelectCategory
                         selectCategory={this.selectCategory}
                         newCat={this.state.selectedCategory}
                     />
+                    <StyleButton
+                        className="edit"
+                        size="small"
+                        color="secondary"
+                        veriant="text"
+                        startIcon={<DeleteForeverTwoToneIcon fontSize="medium"/>}
+                        onClick={<SelectCategory selectCategory={this.selectCategory}/>} //todo ч-з функцию при клике вкл/выкл удалять категорию
+                    >this category
+                    </StyleButton>
                 </span>
                 <Todos selectedCategory={this.state.selectedCategory}/>
             </div>
