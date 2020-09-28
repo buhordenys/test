@@ -1,19 +1,22 @@
 import React from "react";
 import TextAreaComment from "./TextAreaComment";
 import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 
-function Item({ todo, onCheckMark, selectComment, editTodo}) {
-    let classes = []
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: "100%",
+    },
+}));
 
-    if (todo.complete) {
-        classes.push('completedItem')
-    }
+function Item({ todo, onCheckMark, selectComment, editTodo}) {
+    const classesCss = useStyles();
 
     return (
         <li className='listLi'>
-            <span className={classes.join(' ')}>
+            <div className={`todo-item ${todo.complete ? 'completed-item' : ''}`}>
                 <Checkbox
                   size="small"
                   checked={todo.complete}
@@ -21,13 +24,13 @@ function Item({ todo, onCheckMark, selectComment, editTodo}) {
                   inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
                 <TextField
+                    className={classesCss.root}
                     placeholder="You didn't input note"
-                    id="standard-read-only-input"
                     multiline={true}
                     onChange={(event)=> editTodo(todo.id, event.target.value)}
                     defaultValue={todo.title}
                 />
-            </span>
+            </div>
 
             <TextAreaComment selectComment={selectComment} thisTodo={todo}/>
         </li>

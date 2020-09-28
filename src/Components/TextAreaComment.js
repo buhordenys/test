@@ -65,7 +65,6 @@ function CommentoutButton(props) {
 }
 
 function CommentButton(props) {
-    console.log(props.valueComment)
     return (
         <button className={props.valueComment.length > 0  ? 'buttonCommentOut' : 'buttonComment'} onClick={props.onClick}>
             Comment
