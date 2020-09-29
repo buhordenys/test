@@ -1,16 +1,14 @@
 import React from "react";
 import FormCategories from "./FormCategories";
-import image from "../image/logoTodo.jpg";
-import Paper from '@material-ui/core/Paper';
-
+import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined';
 
 //todo не могу понять, как добавить картинку в проект
 function TaskList() {
     return (
         <div className="FormCategories">
             <span>
-                <img
-                    src={image}
+                <CollectionsBookmarkOutlinedIcon
+                    fontSize="large"
                     alt="..ups..."
                     className='logoTodo'
                 />

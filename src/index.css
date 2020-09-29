@@ -6,9 +6,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  //background: url(image/plain_background.jpg) no-repeat;
-  //background-size: 100%;
-
+  border: none;
+  border-radius: 2px;
+  box-shadow:
+          inset 0 0 5px rgba(0,0,0,0.1);
+  background: lightcyan;
+  color: #777;
+  transition: color 0.3s ease-out;
 }
 
 code {
@@ -38,9 +42,6 @@ h1 {
 }
 
 .logoTodo {
-  height: 5%;
-  width: 5%;
-
   margin: 20px 0 0 0;
 }
 
@@ -191,14 +192,6 @@ h1 {
   align-items: center;
   padding: .2rem 1rem;
   margin: 0 15px .5rem 15px;
-
-  border: none;
-  border-radius: 2px;
-  box-shadow:
-          inset 0 0 5px rgba(0,0,0,0.1);
-  background: #f9f9f9;
-  color: #777;
-  transition: color 0.3s ease-out;
 }
 
 .checkboxLi {
@@ -231,4 +224,10 @@ h1 {
 
 .buttonComment:hover {
   color: dodgerblue;
+}
+
+.textAreaComment {
+  width: 90%;
+  margin-bottom: 10px;
+  border: none;
 }

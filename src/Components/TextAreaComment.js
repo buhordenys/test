@@ -1,6 +1,23 @@
 import React from 'react'
 
 
+function TextAreaComment({thisTodo, selectComment}) {
+        return <textarea
+            placeholder="write your comment for note"
+            value={thisTodo.valueComment}
+            onChange={(event)=> selectComment(thisTodo.id, event.target.value)}
+            className="textAreaComment"
+            rows="5"
+        >value</textarea>
+}
+
+export default TextAreaComment;
+
+
+
+
+/* todo предыдуще реализованный код:
+
 class TextAreaComment extends React.Component {
     constructor(props) {
         super(props)
@@ -43,18 +60,6 @@ class TextAreaComment extends React.Component {
 
 }
 
-function SetComment({textareaOff, isOpen, valueComment, thisId, addCommemt}) {
-    if (isOpen) {
-
-        return <textarea
-                onBlur={textareaOff}
-                value={valueComment}
-                onChange={(event)=> addCommemt(thisId, event.target.value)}
-                className="textAreaComment"
-            >{valueComment}</textarea>
-    }
-    return <></>
-}
 
 function CommentoutButton(props) {
     return (
@@ -71,6 +76,5 @@ function CommentButton(props) {
         </button>
     )
 }
+*/
 
-
-export default TextAreaComment;
