@@ -13,6 +13,16 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
     },
+    completed: {
+        textDecoration: "line-through",
+        color: "#f50057",
+
+    },
+    accordionSummary: {
+        '& .MuiAccordionSummary-expandIcon': {
+            color: "red",
+        }
+    }
 }));
 
 function Item({ todo, onCheckMark, selectComment, editTodo}) {
@@ -22,13 +32,14 @@ function Item({ todo, onCheckMark, selectComment, editTodo}) {
             <div className={classes.root}>
                 <Accordion>
                     <AccordionSummary
-
+                        className={todo.valueComment.length > 0  ? classes.accordionSummary : ''}
                         expandIcon={<ExpandMoreIcon />}
                         aria-label="Expand"
                         aria-controls="additional-actions1-content"
                         id="additional-actions1-header"
                     >
                         <FormControlLabel
+                            className={todo.complete ? classes.completed : ''}
                             aria-label="Acknowledge"
                             onClick={(event) => event.stopPropagation()}
                             onFocus={(event) => event.stopPropagation()}
@@ -54,6 +65,23 @@ function Item({ todo, onCheckMark, selectComment, editTodo}) {
 export default Item;
 
 
+/*
+const styles = theme => ({
+  expanded: {
+    "& $icon": {
+      transform: "translateY(-50%) rotate(90deg)"
+    }
+  },
+  icon: {}
+});
+
+<ExpansionPanelSummary
+    expandIcon={<ExpandMoreIcon classes={{ root: classes.icon }} />}
+    classes={{ expanded: classes.expanded }}
+>
+
+ */
+
 
 /*todo предыдущее решение без использования Material-ui:
 
@@ -75,7 +103,7 @@ export default Item;
 
 <TextAreaComment selectComment={selectComment} thisTodo={todo}/>
 
-
+todo.valueComment.length > 0  ? 'button-out' : ''
 
 
 
