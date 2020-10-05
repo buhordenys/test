@@ -2,11 +2,11 @@ import React from "react";
 import TextAreaComment from "./TextAreaComment";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from '@material-ui/core/styles';
-
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import TextField from '@material-ui/core/TextField';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     completed: {
         textDecoration: "line-through",
         color: "#f50057",
-
     },
     accordionSummary: {
         '& .MuiAccordionSummary-expandIcon': {
@@ -27,29 +26,36 @@ const useStyles = makeStyles((theme) => ({
 
 function Item({ todo, onCheckMark, selectComment, editTodo}) {
     const classes = useStyles();
+
+    // todo onClick, onFocus: let stopProp = (event) => event.stopPropagation();
+
     return (
         <li className='listLi'>
             <div className={classes.root}>
                 <Accordion>
                     <AccordionSummary
-                        className={todo.valueComment.length > 0  ? classes.accordionSummary : ''}
+                        className={todo.valueComment && (todo.valueComment.length > 0)  ? classes.accordionSummary : ''}
                         expandIcon={<ExpandMoreIcon />}
                         aria-label="Expand"
                         aria-controls="additional-actions1-content"
                         id="additional-actions1-header"
                     >
-                        <FormControlLabel
-                            className={todo.complete ? classes.completed : ''}
+                        <Checkbox
                             aria-label="Acknowledge"
                             onClick={(event) => event.stopPropagation()}
                             onFocus={(event) => event.stopPropagation()}
-                            control={<Checkbox
-                                checked={todo.complete}
-                                onChange={()=>{onCheckMark(todo.id)}}
-                            />}
+                            checked={todo.complete}
+                            disabled={todo.complete}
+                            onChange={()=>{onCheckMark(todo.id, !todo.complete)}}
+                        />
+                        <TextField
+                            className={`${classes.root} ${todo.complete ? classes.completed : ''}`}
+                            disabled={todo.complete}
                             placeholder="You didn't input note"
+                            multiline={true}
+                            onClick={(event) => event.stopPropagation()}
                             onChange={(event)=> editTodo(todo.id, event.target.value)}
-                            label={todo.title}
+                            defaultValue={todo.title}
                         />
                     </AccordionSummary>
 

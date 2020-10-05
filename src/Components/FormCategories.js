@@ -11,7 +11,6 @@ class FormCategories extends React.Component {
     }
 
    selectCategory = (value) => {
-        console.log(`selectForm: " ${value} "`)
        this.setState (
            {
                selectedCategory: value

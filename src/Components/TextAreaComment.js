@@ -8,6 +8,7 @@ function TextAreaComment({thisTodo, selectComment}) {
             onChange={(event)=> selectComment(thisTodo.id, event.target.value)}
             className="textAreaComment"
             rows="5"
+            disabled={thisTodo.complete}
         >value</textarea>
 }
 

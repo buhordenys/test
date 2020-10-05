@@ -20,7 +20,9 @@ class Todos extends React.Component {
         }
     }
 
-    //todo перехватывает обновление, если категория уже есть в массиве переданного пропса FormCategories.js(this.state.selectedCategory), то пропускаем добавление нового элемента с задачами, которое ведет за собой переписывание на нового в формате ниже. А в противном случае добавляет новую категорию к нам, с чистим List выбор категорий:
+    //todo перехватывает обновление, если категория уже есть в массиве переданного пропса FormCategories.js(this.state.selectedCategory),
+    // то пропускаем добавление нового элемента с задачами, которое ведет за собой переписывание на нового в формате ниже.
+    // А в противном случае добавляет новую категорию к нам, с чистим List выбор категорий:
     componentWillReceiveProps(props, context) {
         if (!this.howUseCategory(props.selectedCategory)) {
             this.setState(
@@ -76,39 +78,21 @@ class Todos extends React.Component {
 
     //todo перебирает массив his.state.todoes и возвращает уже с новый массив с правками, которые прописаны в дочерних компонентах:
     // в данном случае зачеркиват выбранный в checkbox вариант
-    mapTodoes = (id) => {
+    mapTodos = ({id, value, key}) => {
         return this.state.todoes[this.props.selectedCategory].map((note) => {
             if(note.id === id) {
-                note.complete = !note.complete
+                note[key] = value
             }
             return note
         })
     }
 
-    mapTodoesComment = (id, value) => {
-        return this.state.todoes[this.props.selectedCategory].map((note) => {
-            if (note.id === id) {
-                note.valueComment = value
-            }
-            return note
-        })
-    }
-
-    mapEditComment = (id, value) => {
-        return this.state.todoes[this.props.selectedCategory].map((note) => {
-            if (note.id === id) {
-                note.title = value
-            }
-            return note
-        })
-    }
-
-    //todo функция, которая объеденила filterTodoes и mapTodoes. Ее же собственно и передаем дочерним компонентам
-    onChange = (id) => {
+    //todo функция - удаляет заметку, которая объеденила filterTodoes и mapTodoes. Ее же собственно и передаем дочерним компонентам
+    onComplete = (id, value) => {
         this.setState({
             todoes: {
                 ...this.state.todoes,
-                [this.props.selectedCategory]:this.mapTodoes(id)
+                [this.props.selectedCategory]:this.mapTodos({id, value, key:'complete'})
             }
         },
             () => {
@@ -123,12 +107,21 @@ class Todos extends React.Component {
             }
         )
     }
+    //todo: здесь можно использовать lodash-библиотеку функцию debounce - она вызывает крайний колбэк, в вызове одной функции в диапазоне заданного времени (время сам задаешь):
+    onChange = (id, value) => {
+        this.setState({
+            todoes: {
+                ...this.state.todoes,
+                [this.props.selectedCategory]: this.mapTodos({id, value, key:'title'})
+            }
+        })
+    }
 
     addComment = (id, value) => {
         this.setState({
             todoes: {
                 ...this.state.todoes,
-                [this.props.selectedCategory]: this.mapTodoesComment(id, value)
+                [this.props.selectedCategory]: this.mapTodos({id, value, key:'valueComment'})
             }
         })
     }
@@ -139,9 +132,9 @@ class Todos extends React.Component {
                 <InputTodo addTodo={this.addTodo}/>
                 <List
                     todoes={this.selectTodosCategories()}
-                    сheckMark={this.onChange}
+                    сheckMark={this.onComplete}
                     addComment={this.addComment}
-                    mapEditComment={this.mapEditComment}
+                    mapEditComment={this.onChange}
                 />
             </div>
         )

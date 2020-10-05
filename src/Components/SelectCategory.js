@@ -30,7 +30,6 @@ class SelectCategory extends React.Component {
     }
 
     addCategory = (event) => {
-        console.log(222)
         const value = event.target.value
 
         if (value === '+ add your category') {
@@ -47,18 +46,15 @@ class SelectCategory extends React.Component {
                     ]
                 }, () => this.props.selectCategory(newCat))
         } else {
-            console.log("else")
             this.props.selectCategory(value)
         }
     }
 
     dellCategory = () => {
         const value = this.props.newCat
-        console.log(value)
 
         const question = window.confirm("Do you really wont delete category?")
         if (question) {
-            console.log(this.state.categories)
             this.setState(
                 {
                     categories: this.state.categories.filter(note => note.title !== value)
