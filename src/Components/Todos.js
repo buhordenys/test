@@ -36,7 +36,7 @@ class Todos extends React.Component {
         }
     }
 
-    //todo сравнение есть ли такая же категория, какую мы выбрали в FormCategories.js, в нашем стайте или нет
+    //todo сравнение есть ли такая же категория, какую мы выбрали в FormCategories.js, в нашем стэйте или нет
     howUseCategory(el) {
         let arrCategorise = Object.keys(this.state.todoes).valueOf()
         return arrCategorise.find(item => item === el);

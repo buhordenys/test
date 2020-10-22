@@ -35,18 +35,9 @@ class SelectCategory extends React.Component {
         if (value === '+ add your category') {
             console.log("add")
             const newCat = prompt('Add your new Category: ')
-            this.setState(
-                {
-                    categories: [
-                        ...this.state.categories,
-                        {
-                            id: this.getId(),
-                            title: newCat,
-                        }
-                    ]
-                }, () => this.props.selectCategory(newCat))
+            this.props.addNewCategory(newCat)
         } else {
-            this.props.selectCategory(value)
+            this.props.changeCategory(value)
         }
     }
 
