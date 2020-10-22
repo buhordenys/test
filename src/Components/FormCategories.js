@@ -1,6 +1,5 @@
 import React from "react";
-import SelectCategory from "./SelectCategory";
-import Todos from "./Todos";
+
 
 class FormCategories extends React.Component {
     constructor(props) {
@@ -18,7 +17,7 @@ class FormCategories extends React.Component {
        )
     }
 
-    render() {
+    /* todo render() {
         return (
             <div>
                 <span className="spanCategory">
@@ -30,7 +29,6 @@ class FormCategories extends React.Component {
                 <Todos selectedCategory={this.state.selectedCategory}/>
             </div>
         )
-    }
+    }*/
 }
 
-export default FormCategories;

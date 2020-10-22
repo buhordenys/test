@@ -2,6 +2,8 @@ import React from "react";
 import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
 import {withStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import {connect} from 'react-redux';
+import {addNewCategory, deleteCategory, changeCategory} from "../redux/actions/category";
 
 
 const StyleButton = withStyles({
@@ -15,25 +17,11 @@ const StyleButton = withStyles({
 class SelectCategory extends React.Component {
     constructor(props) {
         super(props)
-        this.id = 0
-        this.state = {
-            categories:  [
-                    {id: this.getId(), title:'+ add your category'},
-                    {id: this.getId(), title:'Home'},
-                    {id: this.getId(), title:'Work'}
-                ]
-        }
-    }
-
-    getId = () => {
-        return ++this.id
     }
 
     addCategory = (event) => {
         const value = event.target.value
-
         if (value === '+ add your category') {
-            console.log("add")
             const newCat = prompt('Add your new Category: ')
             this.props.addNewCategory(newCat)
         } else {
@@ -42,18 +30,9 @@ class SelectCategory extends React.Component {
     }
 
     dellCategory = () => {
-        const value = this.props.newCat
-
         const question = window.confirm("Do you really wont delete category?")
         if (question) {
-            this.setState(
-                {
-                    categories: this.state.categories.filter(note => note.title !== value)
-                }, () => {
-                    console.log(this.state.categories)
-                    this.props.selectCategory('Add your new Category: ')
-                }
-            )
+            this.props.deleteCategory()
         }
     }
 
@@ -61,12 +40,12 @@ class SelectCategory extends React.Component {
         return (
             <div>
                 <select
-                    value={this.props.newCat}
+                    value={this.props.selectedCategory}
                     onChange={this.addCategory}
                     className='selectCategory'
                 >
                     {
-                        this.state.categories.map( (category) => {
+                        this.props.categories.map( (category) => {
                                 return (
                                     <option
                                         key={category.id}
@@ -85,7 +64,7 @@ class SelectCategory extends React.Component {
                     color="secondary"
                     veriant="text"
                     startIcon={<DeleteForeverTwoToneIcon fontSize="large"/>}
-                    onClick={this.dellCategory} //todo ч-з функцию при клике вкл/выкл удалять категорию
+                    onClick={this.dellCategory}
                 >this category
                 </StyleButton>
 
@@ -94,4 +73,15 @@ class SelectCategory extends React.Component {
     }
 }
 
-export default SelectCategory;
+const mapStateToProps = (state) => ({
+    selectedCategory: state.categories.selectedCategory,
+    categories: state.categories.categories
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    addNewCategory: () => dispatch(addNewCategory()),
+    deleteCategory: () => dispatch(deleteCategory()),
+    changeCategory: () => dispatch(changeCategory()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectCategory);

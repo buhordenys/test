@@ -1,24 +1,14 @@
 import React from "react";
 import List from "./List";
 import InputTodo from "./InputTodo";
+import {connect} from 'react-redux';
 
 
 
 class Todos extends React.Component {
     constructor(props) {
         super(props)
-        this.id = 0
-        this.state = {
-            todoes: {
-                [this.props.selectedCategory]:
-                    [
-                        { id: this.getId(), complete: false, title: 'note one', valueComment: 'test'},
-                        { id: this.getId(), complete: false, title: 'note two', valueComment: ''},
-                        { id: this.getId(), complete: false, title: 'note three', valueComment: ''},
-                    ],
-            }
         }
-    }
 
     //todo перехватывает обновление, если категория уже есть в массиве переданного пропса FormCategories.js(this.state.selectedCategory),
     // то пропускаем добавление нового элемента с задачами, которое ведет за собой переписывание на нового в формате ниже.

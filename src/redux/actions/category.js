@@ -3,7 +3,7 @@ export const addNewCategory = (newCat) => ({
     payload: newCat,
 });
 
-export const dellCategory = () => {
+export const deleteCategory = () => {
     const question = window.confirm("Do you really wont delete category?")
     return question ? {type: 'DELL-CATEGORY'} : {}
 };

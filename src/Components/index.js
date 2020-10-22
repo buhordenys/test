@@ -1,6 +1,7 @@
 import React from "react";
-import FormCategories from "./FormCategories";
 import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined';
+import SelectCategory from "./SelectCategory";
+import Todos from "./Todos";
 
 //todo не могу понять, как добавить картинку в проект
 function TaskList() {
@@ -17,7 +18,10 @@ function TaskList() {
             </span>
 
             <div className='formCategories'>
-            <FormCategories />
+                <span className="spanCategory">
+                    <SelectCategory />
+                </span>
+                    <Todos />
             </div>
         </div>
     )
