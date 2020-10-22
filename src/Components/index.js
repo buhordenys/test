@@ -3,7 +3,7 @@ import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookm
 import SelectCategory from "./SelectCategory";
 import Todos from "./Todos";
 
-//todo не могу понять, как добавить картинку в проект
+
 function TaskList() {
     return (
         <div className="FormCategories">

@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import Item from "./Item";
 
 
@@ -19,4 +19,4 @@ function List(props) {
     )
 }
 
-export default List;
+export default List;*/

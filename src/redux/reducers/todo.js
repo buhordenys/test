@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import {initialStateCategory} from './category'
-import {ADD_TODO, CHANGE_TODO, COMPLETE_TODO, EDIT_COMMENT} from "../actions/todo";
+import {ADD_TODO, CHANGE_TODO, COMPLETE_TODO, EDIT_COMMENT, DELETE_TODO} from "../actions/todo";
 
 const initialState = [
     {
@@ -51,10 +51,21 @@ export default function todo(state = initialState, action) {
                 title: action.payload,
             }
         }
+        case DELETE_TODO: {
+            return {
+                ...state,
+                todos: state.todos.filter(note => note.id !== action.payload),  //todo ???????
+            }
+        }
         case COMPLETE_TODO: {
             return {
                 ...state,
-                todos: state.todos.filter(note => note.id !== action.value),  //todo ???????
+                todos: state.todos.map((note) => {
+                    if (note.id === action.id) {
+                        note.complete = action.value
+                    }
+                    return note
+                }),
             }
         }
         case EDIT_COMMENT: {
