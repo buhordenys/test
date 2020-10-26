@@ -1,30 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux';
 import {editComment} from "../redux/actions/todo";
-import {selectComplete, selectValueComment} from "../redux/selectors/todo";
 
 
 function TextAreaComment(props) {
         return <textarea
             placeholder="write your comment for note"
             value={props.comment}
-            onChange={(event)=> props.edit(event.target.value)}
+            onChange={(event)=> props.edit(event.target.value, props.todo.id)}
             className="textAreaComment"
             rows="5"
             disabled={props.complete}
-        >value</textarea>
+        />
 }
 
-const mapStateToProps = (state) => ({
-        complete: selectComplete(state),
-        comment: selectValueComment(state),
-})
-
 const mapDispatchToProps = (dispatch) => ({
-        edit: () => dispatch(editComment())
+        edit: (value, id) => dispatch(editComment(value, id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextAreaComment);
+export default connect(() => ({}), mapDispatchToProps)(TextAreaComment);
 
 
 

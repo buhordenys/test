@@ -3,6 +3,7 @@ import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import {connect} from 'react-redux';
 import {addTodoAction} from '../redux/actions/todo'
 
+
 class InputTodo extends React.Component {
     constructor(props) {
         super(props);
@@ -41,12 +42,8 @@ class InputTodo extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-
-}
-
 const mapDispatchToProps = (dispatch) => ({
     addTodoAction: () => dispatch(addTodoAction()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputTodo);
+export default connect(() => ({}), mapDispatchToProps)(InputTodo);

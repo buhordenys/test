@@ -3,24 +3,24 @@ export const addTodoAction = (value) => ({
     payload: value,
 });
 
-export const changeTodo = (value) => ({
+export const changeTodo = (value, id) => ({
     type: 'CHANGE-TODO',
-    payload: value,
+    payload: {value, id}
 });
 
-export const deleteTodo = (value) => ({
+export const deleteTodo = (id) => ({
     type: 'DELETE-TODO',
-    payload: value,
+    payload: id,
 });
 
-export const completedTodo = (value) => ({
+export const completedTodo = (value, id) => ({
     type: 'COMPLETE-TODO',
-    payload: value,
+    payload: {value, id}
 })
 
-export const editComment = (value) => ({
+export const editComment = (value, id) => ({
     type: 'EDIT-COMMENT',
-    payload: value,
+    payload: {value, id}
 });
 
 export const ADD_TODO = 'ADD-TODO'

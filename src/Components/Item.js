@@ -33,7 +33,7 @@ function Item(props) {
         setTimeout( () => {
             props.deleteTodo(id)
         }, 5000)
-        return props.completedTodo(value)
+        return props.completedTodo(value, props.todo.id)
 
     }
 
@@ -44,7 +44,11 @@ function Item(props) {
             <div className={classes.root}>
                 <Accordion>
                     <AccordionSummary
-                        className={props.valueComment && (props.valueComment.length > 0)  ? classes.accordionSummary : ''}
+                        className={
+                            props.todo.valueComment && (props.todo.valueComment.length > 0)
+                                ? classes.accordionSummary
+                                : ''
+                        }
                         expandIcon={<ExpandMoreIcon />}
                         aria-label="Expand"
                         aria-controls="additional-actions1-content"
@@ -54,24 +58,26 @@ function Item(props) {
                             aria-label="Acknowledge"
                             onClick={(event) => event.stopPropagation()}
                             onFocus={(event) => event.stopPropagation()}
-                            checked={props.complete}
-                            disabled={props.complete}
-                            onChange={()=>{onCheckMark(props.id, !props.complete)}}
+                            checked={props.todo.complete}
+                            disabled={props.todo.complete}
+                            onChange={()=>{onCheckMark(props.todo.id, !props.todo.complete)}}
                         />
                         <TextField
-                            className={`${classes.root} ${props.complete ? classes.completed : ''}`}
-                            disabled={props.complete}
+                            className={`${classes.root} ${props.todo.complete ? classes.completed : ''}`}
+                            disabled={props.todo.complete}
                             placeholder="You didn't input note"
                             multiline={true}
                             onClick={(event) => event.stopPropagation()}
                             onChange={
-                                (event) => props.change(event.target.value)
+                                (event) => {
+                                    props.change(event.target.value, props.todo.id)
+                                }
                             }
-                            defaultValue={props.title}
+                            defaultValue={props.todo.title}
                         />
                     </AccordionSummary>
 
-                    <TextAreaComment />
+                    <TextAreaComment todo={props.todo} />
 
                 </Accordion>
             </div>
@@ -79,20 +85,13 @@ function Item(props) {
     )
 }
 
-const mapStateToProps = (state) => ({
-    id: selectId(state),
-    title: selectTitle(state),
-    completed: selectComplete(state),
-    valueComment: selectValueComment(state),
-})
-
 const mapDispatchToProps = (dispatch) => ({
-    change: () => dispatch(changeTodo()),
-    completedTodo: () => dispatch(completedTodo()),
-    deleteTodo: () => dispatch(deleteTodo()),
+    change: (value, id) => dispatch(changeTodo(value, id)),
+    completedTodo: (value, id) => dispatch(completedTodo(value, id)),
+    deleteTodo: (id) => dispatch(deleteTodo(id)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Item);
+export default connect(() => ({}), mapDispatchToProps)(Item);
 
 
 /*

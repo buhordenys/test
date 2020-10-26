@@ -2,14 +2,35 @@ import React from "react";
 import InputTodo from "./InputTodo";
 import Item from "./Item";
 import {connect} from 'react-redux'
-import {stateTodo} from "../redux/selectors/todo";
+import {selectCategoryTodos} from "../redux/selectors/todo";
 
 
+const Todos = (props) => {
+    return (
+        <div>
+            <InputTodo />
+            <ul className='listUl'>
+                {
+                    props.todos.map(todo => {
+                        return <Item
+                                key={todo.id}
+                                todo={todo}
+                            />
+                    })
+                }
+            </ul>
+        </div>
+    )
+}
 
-class Todos extends React.Component {
-    constructor(props) {
-        super(props)
-        }
+const mapStateToProps = (state) => ({
+    todos: selectCategoryTodos(state),
+})
+
+export default connect(mapStateToProps)(Todos);
+
+/*
+
 
     //todo перехватывает обновление, если категория уже есть в массиве переданного пропса FormCategories.js(this.state.selectedCategory),
     // то пропускаем добавление нового элемента с задачами, которое ведет за собой переписывание на нового в формате ниже.
@@ -39,31 +60,6 @@ class Todos extends React.Component {
 
     //todo генерирует новые key в перебираемые объкты, для логики React
 
-    render() {
-        return (
-            <div>
-                <InputTodo />
-                <ul className='listUl'>
-                    {
-                        props.todos.map(todo => {
-                            return <Item
-                                    key={todo.id}
-                                />
-                        })
-                    }
-                </ul>
-            </div>
-        )
-    }
-}
-
-const mapStateToProps = (state) => ({
-    todos: stateTodo(state),
-})
-
-export default connect(mapStateToProps)(Todos);
-
-/*
         addTodo = (value) => {
             this.setState(
                 {
