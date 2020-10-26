@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 
 
 class FormCategories extends React.Component {
@@ -29,6 +29,7 @@ class FormCategories extends React.Component {
                 <Todos selectedCategory={this.state.selectedCategory}/>
             </div>
         )
-    }*/
+    }
 }
 
+*/

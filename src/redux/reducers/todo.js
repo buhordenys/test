@@ -60,7 +60,7 @@ export default function todo(state = initialState, action) {
         case COMPLETE_TODO: {
             return {
                 ...state,
-                todos: state.todos.map((note) => {
+                todos: state.todos.map((note) => { //todo ???????????
                     if (note.id === action.id) {
                         note.complete = action.value
                     }

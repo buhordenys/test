@@ -61,11 +61,7 @@ const mapStateToProps = (state) => ({
     todos: stateTodo(state),
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+export default connect(mapStateToProps)(Todos);
 
 /*
         addTodo = (value) => {
