@@ -6,11 +6,11 @@ import {editComment} from "../redux/actions/todo";
 function TextAreaComment(props) {
         return <textarea
             placeholder="write your comment for note"
-            value={props.comment}
+            value={props.todo.valueComment}
             onChange={(event)=> props.edit(event.target.value, props.todo.id)}
             className="textAreaComment"
             rows="5"
-            disabled={props.complete}
+            disabled={props.todo.complete}
         />
 }
 

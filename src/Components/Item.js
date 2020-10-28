@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
 function Item(props) {
     const classes = useStyles();
 
-    const onCheckMark = (id, value) => {
+    const onCheckMark = (value, id) => {
         setTimeout( () => {
             props.deleteTodo(id)
         }, 5000)
-        return props.completedTodo(value, props.todo.id)
+        return props.completedTodo(value, id)
 
     }
 
@@ -60,7 +60,7 @@ function Item(props) {
                             onFocus={(event) => event.stopPropagation()}
                             checked={props.todo.complete}
                             disabled={props.todo.complete}
-                            onChange={()=>{onCheckMark(props.todo.id, !props.todo.complete)}}
+                            onChange={()=>{onCheckMark(!props.todo.complete, props.todo.id)}}
                         />
                         <TextField
                             className={`${classes.root} ${props.todo.complete ? classes.completed : ''}`}

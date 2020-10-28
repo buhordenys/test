@@ -4,6 +4,7 @@ import {withStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
 import {addNewCategory, deleteCategory, changeCategory} from "../redux/actions/category";
+import {selectSelectedCategoryTitle} from "../redux/selectors/category";
 
 
 const StyleButton = withStyles({
@@ -37,10 +38,11 @@ class SelectCategory extends React.Component {
     }
 
     render() {
+        console.log(this.props.categories.selectedCategory)
         return (
             <div>
                 <select
-                    value={this.props.selectedCategory}
+                    value={this.props.categories.selectedCategory}
                     onChange={this.addCategory}
                     className='selectCategory'
                 >
@@ -74,7 +76,7 @@ class SelectCategory extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    selectedCategory: state.categories.selectedCategory,
+    selectedCategory: selectSelectedCategoryTitle(state),
     categories: state.categories.categories
 })
 

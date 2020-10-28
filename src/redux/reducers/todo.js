@@ -33,21 +33,23 @@ export default function todo(state = initialState, action) {
 
     switch (action.type) {
         case ADD_TODO: {
+            console.log(state)
             return state.map((stateTodos) => {
+                console.log(stateTodos, selectSelectedCategory(state))
                 if(stateTodos.category === selectSelectedCategory(state)) {
                     return {
                         ...stateTodos,
                         todos: stateTodos.todos.map((todo) => {
-                                return [
-                                    ...todo,
-                                    {
-                                        id: uuidv4(),
-                                            title: action.payload,
-                                        complete: false,
-                                        valueComment: ''
-                                    }
-                                ]
-
+                            console.log(todo)
+                            return [
+                                ...todo,
+                                {
+                                    id: uuidv4(),
+                                    title: action.payload,
+                                    complete: false,
+                                    valueComment: ''
+                                }
+                            ]
                         })
                     }
                 }
