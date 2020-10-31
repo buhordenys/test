@@ -11,7 +11,7 @@ const Todos = (props) => {
             <InputTodo />
             <ul className='listUl'>
                 {
-                    props.todos.map(todo => {
+                    props.todos?.map(todo => {
                         return <Item
                                 key={todo.id}
                                 todo={todo}

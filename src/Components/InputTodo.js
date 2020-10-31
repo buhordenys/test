@@ -42,8 +42,6 @@ class InputTodo extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    addTodoAction: () => dispatch(addTodoAction()),
-})
+const mapDispatchToProps = { addTodoAction };
 
 export default connect(() => ({}), mapDispatchToProps)(InputTodo);

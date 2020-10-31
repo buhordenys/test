@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {initialStateCategory} from './category'
 import {ADD_TODO, CHANGE_TODO, COMPLETE_TODO, EDIT_COMMENT, DELETE_TODO} from "../actions/todo";
 import {selectSelectedCategory} from '../selectors/category'
+import {ADD_NEW_CATEGORY} from "../actions/category";
 
 const initialState = [
     {
@@ -26,35 +27,41 @@ const initialState = [
                 valueComment: ''
             },
         ],
-    }
+    },
 ]
 
 export default function todo(state = initialState, action) {
 
     switch (action.type) {
         case ADD_TODO: {
-            console.log(state)
+            const  selectCategory = selectSelectedCategory(state)
             return state.map((stateTodos) => {
-                console.log(stateTodos, selectSelectedCategory(state))
-                if(stateTodos.category === selectSelectedCategory(state)) {
+                console.log(stateTodos.category, selectCategory)
+                if(stateTodos.category === selectCategory) {
                     return {
                         ...stateTodos,
-                        todos: stateTodos.todos.map((todo) => {
-                            console.log(todo)
-                            return [
-                                ...todo,
+                        todos: [
+                                ...stateTodos,
                                 {
                                     id: uuidv4(),
                                     title: action.payload,
                                     complete: false,
                                     valueComment: ''
                                 }
-                            ]
-                        })
+                                ]
                     }
                 }
                 return stateTodos
             })
+        }
+        case ADD_NEW_CATEGORY: {
+            return [
+                ...state,
+                {
+                    category: action.payload.id,
+                    todos: []
+                }
+            ]
         }
         case CHANGE_TODO: {
             return state.map((stateTodos) => {

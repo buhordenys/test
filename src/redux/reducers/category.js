@@ -3,13 +3,13 @@ import {ADD_NEW_CATEGORY, DELETE_CATEGORY, CHANGE_CATEGORY} from "../actions/cat
 
 
 export const initialStateCategory = uuidv4()
+export const stateIdNewCategory = uuidv4()
 
 const initialState = {
     selectedCategory: initialStateCategory,
     categories:  [
-        {id: uuidv4(), title:'+ add your category'},
+        {id: stateIdNewCategory, title:'+ add your category'},
         {id: initialStateCategory, title:'Home'},
-        {id: uuidv4(), title:'Work'}
     ]
 }
 
@@ -20,10 +20,7 @@ export default function categories(state = initialState, action) {
                 ...state,
                 categories: [
                     ...state.categories,
-                    {
-                        id: uuidv4(),
-                        title: action.payload,
-                    }
+                    action.payload,
                 ]
             }
         }
@@ -34,6 +31,7 @@ export default function categories(state = initialState, action) {
             }
         }
         case CHANGE_CATEGORY: {
+            console.log(action.payload)
             return {
                 ...state,
                 selectedCategory: action.payload

@@ -4,7 +4,8 @@ import {withStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {connect} from 'react-redux';
 import {addNewCategory, deleteCategory, changeCategory} from "../redux/actions/category";
-import {selectSelectedCategoryTitle} from "../redux/selectors/category";
+import {selectSelectedCategoryTitle, selectSelectedCategoryFromList} from "../redux/selectors/category";
+import {stateIdNewCategory} from "../redux/reducers/category";
 
 
 const StyleButton = withStyles({
@@ -21,12 +22,12 @@ class SelectCategory extends React.Component {
     }
 
     addCategory = (event) => {
-        const value = event.target.value
-        if (value === '+ add your category') {
+        const categoryId = event.target.value
+        if (categoryId===stateIdNewCategory) {
             const newCat = prompt('Add your new Category: ')
             this.props.addNewCategory(newCat)
         } else {
-            this.props.changeCategory(value)
+            this.props.changeCategory(categoryId)
         }
     }
 
@@ -38,11 +39,11 @@ class SelectCategory extends React.Component {
     }
 
     render() {
-        console.log(this.props.categories.selectedCategory)
+        //console.log(this.props.categories.selectedCategory)
         return (
             <div>
                 <select
-                    value={this.props.categories.selectedCategory}
+                    value={this.props.selectedCategory.id}
                     onChange={this.addCategory}
                     className='selectCategory'
                 >
@@ -50,8 +51,8 @@ class SelectCategory extends React.Component {
                         this.props.categories.map( (category) => {
                                 return (
                                     <option
-                                        key={category.id}
-                                        value={category.title}
+                                        key={category.id + category.title}
+                                        value={category.id}
                                     >
                                         {category.title}
                                     </option>
@@ -76,14 +77,14 @@ class SelectCategory extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    selectedCategory: selectSelectedCategoryTitle(state),
+    selectedCategory: selectSelectedCategoryFromList(state),
     categories: state.categories.categories
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    addNewCategory: () => dispatch(addNewCategory()),
+    addNewCategory: (value) => dispatch(addNewCategory(value)),
     deleteCategory: () => dispatch(deleteCategory()),
-    changeCategory: () => dispatch(changeCategory()),
+    changeCategory: (categoryId) => dispatch(changeCategory(categoryId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectCategory);

@@ -7,7 +7,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
-import {selectComplete, selectId, selectTitle, selectValueComment} from "../redux/selectors/todo";
+import {selectComplete, selectId, selectTitle, selectCategoryTodos} from "../redux/selectors/todo";
 import {completedTodo, changeTodo, deleteTodo} from "../redux/actions/todo";
 
 
@@ -85,13 +85,17 @@ function Item(props) {
     )
 }
 
+/*const mapStateToProps = (state) => ({
+    todo: selectCategoryTodos(state),
+})
+*/
 const mapDispatchToProps = (dispatch) => ({
     change: (value, id) => dispatch(changeTodo(value, id)),
     completedTodo: (value, id) => dispatch(completedTodo(value, id)),
     deleteTodo: (id) => dispatch(deleteTodo(id)),
 })
 
-export default connect(() => ({}), mapDispatchToProps)(Item);
+export default connect( () => ({}), mapDispatchToProps)(Item);
 
 
 /*
