@@ -70,7 +70,7 @@ function Item(props) {
                             onClick={(event) => event.stopPropagation()}
                             onChange={
                                 (event) => {
-                                    props.change(event.target.value, props.todo.id)
+                                    props.changeTodo(event.target.value, props.todo.id)
                                 }
                             }
                             defaultValue={props.todo.title}
@@ -89,11 +89,11 @@ function Item(props) {
     todo: selectCategoryTodos(state),
 })
 */
-const mapDispatchToProps = (dispatch) => ({
-    change: (value, id) => dispatch(changeTodo(value, id)),
-    completedTodo: (value, id) => dispatch(completedTodo(value, id)),
-    deleteTodo: (id) => dispatch(deleteTodo(id)),
-})
+const mapDispatchToProps = {
+    changeTodo,
+    completedTodo,
+    deleteTodo,
+}
 
 export default connect( () => ({}), mapDispatchToProps)(Item);
 

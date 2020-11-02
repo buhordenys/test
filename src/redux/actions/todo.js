@@ -10,15 +10,20 @@ export const EDIT_COMMENT = 'EDIT-COMMENT'
 export const DELETE_TODO = 'DELETE-TODO'
 
 export const addTodoAction = (value) => {
+    console.log(value)
     return (dispatch, getState) => {
-        const  selectCategory = selectSelectedCategory(getState)
-        console.log(getState.todos, selectCategory)
+        const state = getState()
+        const  selectCategory = selectSelectedCategory(state)
+        console.log(state.todos, selectCategory)
 
-        return getState.todos.map((stateTodos) => {
+        return state.todos.forEach((stateTodos) => {
             console.log(stateTodos.category, selectCategory)
             if (stateTodos.category === selectCategory) {
                 return (
-                    dispatch({type: ADD_TODO, payload: value,})
+                    dispatch({
+                        type: ADD_TODO,
+                        payload: {stateTodos, value},
+                    })
                 )
             }
             //todo return - ?
@@ -26,22 +31,83 @@ export const addTodoAction = (value) => {
     }
 };
 
-export const changeTodo = (value, id) => ({
-    type: CHANGE_TODO,
-    payload: {value, id}
-});
+export const changeTodo = (value, id) => {
+    return (dispatch, getState) => {
+        const state = getState()
+        const selectCategory = selectSelectedCategory(state)
 
-export const deleteTodo = (id) => ({
-    type: DELETE_TODO,
-    payload: id,
-});
+        return state.todos.map((stateTodos) => {
+            if (stateTodos.category === selectCategory) {
+                return stateTodos.todos.map((todo) => {
+                    if (todo.id === id) (
+                        dispatch({
+                            type: CHANGE_TODO,
+                            payload: value,
+                        })
+                    )
+                })
+            }
+            //todo return - ?
+        })
+    }
+};
 
-export const completedTodo = (value, id) => ({
-    type: COMPLETE_TODO,
-    payload: {value, id}
-})
+export const deleteTodo = (id) => {
+    return (dispatch, getState) => {
+        const state = getState()
+        const selectCategory = selectSelectedCategory(state)
 
-export const editComment = (value, id) => ({
-    type: EDIT_COMMENT,
-    payload: {value, id}
-});
+        return state.todos.map((stateTodos) => {
+            if (stateTodos.category === selectCategory) {
+                dispatch({
+                    type: DELETE_TODO,
+                    payload: id,
+                })
+            }
+        })
+            //todo return - ?
+    }
+};
+
+
+export const completedTodo = (value, id) => {
+    return (dispatch, getState) => {
+        const state = getState()
+        const selectCategory = selectSelectedCategory(state)
+
+        return state.todos.map((stateTodos) => {
+            if (stateTodos.category === selectCategory) {
+                return stateTodos.todos.map((todo) => {
+                    if (todo.id === id) (
+                        dispatch({
+                            type: COMPLETE_TODO,
+                            payload: {value, id}
+                        })
+                    )
+                })
+            }
+            //todo return - ?
+        })
+    }
+};
+
+export const editComment = (value, id) => {
+    return (dispatch, getState) => {
+        const state = getState()
+        const selectCategory = selectSelectedCategory(state)
+
+        return state.todos.map((stateTodos) => {
+            if (stateTodos.category === selectCategory) {
+                return stateTodos.todos.map((todo) => {
+                    if (todo.id === id) (
+                        dispatch({
+                            type: EDIT_COMMENT,
+                            payload: {value, id}
+                        })
+                    )
+                })
+            }
+            //todo return - ?
+        })
+    }
+};

@@ -7,16 +7,14 @@ function TextAreaComment(props) {
         return <textarea
             placeholder="write your comment for note"
             value={props.todo.valueComment}
-            onChange={(event)=> props.edit(event.target.value, props.todo.id)}
+            onChange={(event)=> props.editComment(event.target.value, props.todo.id)}
             className="textAreaComment"
             rows="5"
             disabled={props.todo.complete}
         />
 }
 
-const mapDispatchToProps = (dispatch) => ({
-        edit: (value, id) => dispatch(editComment(value, id))
-})
+const mapDispatchToProps = {editComment}
 
 export default connect(() => ({}), mapDispatchToProps)(TextAreaComment);
 

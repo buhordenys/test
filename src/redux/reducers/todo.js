@@ -34,25 +34,20 @@ export default function todo(state = initialState, action) {
 
     switch (action.type) {
         case ADD_TODO: {
-            const  selectCategory = selectSelectedCategory(state)
-            return state.map((stateTodos) => {
-                console.log(stateTodos.category, selectCategory)
-                if(stateTodos.category === selectCategory) {
-                    return {
-                        ...stateTodos,
-                        todos: [
-                                ...stateTodos,
-                                {
-                                    id: uuidv4(),
-                                    title: action.payload,
-                                    complete: false,
-                                    valueComment: ''
-                                }
-                                ]
-                    }
-                }
-                return stateTodos
-            })
+            console.log(state, action.payload.stateTodos)
+            let stateTodos = action.payload.stateTodos
+            return {
+                ...stateTodos,
+                todos: [
+                    ...stateTodos,
+                    {
+                        id: uuidv4(),
+                        title: action.payload.value,
+                        complete: false,
+                        valueComment: ''
+                    }]
+
+            }
         }
         case ADD_NEW_CATEGORY: {
             return [
@@ -64,75 +59,31 @@ export default function todo(state = initialState, action) {
             ]
         }
         case CHANGE_TODO: {
-            return state.map((stateTodos) => {
-                if(stateTodos.category === selectSelectedCategory(state)) {
-                  return {
-                      ...stateTodos,
-                      todos: stateTodos.todos.map((todo) => {
-                          if(todo.id === action.payload.id) {
-                              return {
-                                  ...todo,
-                                  title: action.payload.value
-                              }
-                          }
-                          return todo
-                      })
-                  }
-                }
-                return stateTodos
-            })
+            return {
+                  ...state,
+                  title: action.payload.value
+            }
         }
         case DELETE_TODO: {
-            return state.map((stateTodos) => {
-                if(stateTodos.category === selectSelectedCategory(state)) {
-                    return {
-                        ...stateTodos,
-                        todos: stateTodos.todos.filter((todo) => {
-                            return todo.id !== action.payload
-                        })
-                    }
-                }
-                return stateTodos
-            })
+            return {
+                ...state,
+                todos: state.todos.filter((todo) => {
+                    return todo.id !== action.payload
+                })
+            }
 
         }
         case COMPLETE_TODO: {
-            return state.map((stateTodos) => {
-                if(stateTodos.category === selectSelectedCategory(state)) {
-                    return {
-                        ...stateTodos,
-                        todos: stateTodos.todos.map((todo) => {
-                            if(todo.id === action.payload.id) {
-                                return {
-                                    ...todo,
-                                    complete: action.payload.value
-                                }
-                            }
-                            return todo
-                        })
-                    }
-                }
-                return stateTodos
-            })
+            return {
+                ...state,
+                complete: action.payload.value
+            }
         }
         case EDIT_COMMENT: {
-            return state.map((stateTodos) => {
-                if(stateTodos.category === selectSelectedCategory(state)) {
-                    return {
-                        ...stateTodos,
-                        todos: stateTodos.todos.map((todo) => {
-                            if(todo.id === action.payload.id) {
-                                return {
-                                    ...todo,
-                                    valueComment: action.payload.value
-                                }
-                            }
-                            return todo
-                        })
-                    }
-                }
-                return stateTodos
-            })
+            return {
+                ...state,
+                valueComment: action.payload.value
+            }
         }
         default: {
             return state

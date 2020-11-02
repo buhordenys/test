@@ -1,6 +1,7 @@
 import {createSelector} from 'reselect';
 
 export const selectStateCategories = (state) => {
+    console.log(state)
     return state.categories
 }
 
@@ -14,7 +15,6 @@ export const selectSelectedCategoryFromList = createSelector(
     selectSelectedCategory,
     (stateCategories, selectedCategory) => {
         return stateCategories.categories.find( (category) => {
-            console.log(category)
             return category.id === selectedCategory
         } )
     }
