@@ -9,6 +9,7 @@ export const selectCategoryTodos = createSelector(
     selectStateTodos,
     selectSelectedCategory,
     (stateTodos, selectedCategory) => {
+        console.log(stateTodos,selectedCategory)
         return stateTodos.find( (todo) => todo.category === selectedCategory )?.todos
     }
 )

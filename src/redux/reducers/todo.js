@@ -34,20 +34,7 @@ export default function todo(state = initialState, action) {
 
     switch (action.type) {
         case ADD_TODO: {
-            console.log(state, action.payload.stateTodos)
-            let stateTodos = action.payload.stateTodos
-            return {
-                ...stateTodos,
-                todos: [
-                    ...stateTodos,
-                    {
-                        id: uuidv4(),
-                        title: action.payload.value,
-                        complete: false,
-                        valueComment: ''
-                    }]
-
-            }
+            return action.payload
         }
         case ADD_NEW_CATEGORY: {
             return [
@@ -58,33 +45,14 @@ export default function todo(state = initialState, action) {
                 }
             ]
         }
-        case CHANGE_TODO: {
-            return {
-                  ...state,
-                  title: action.payload.value
-            }
-        }
-        case DELETE_TODO: {
-            return {
-                ...state,
-                todos: state.todos.filter((todo) => {
-                    return todo.id !== action.payload
-                })
+        case CHANGE_TODO:
+        case DELETE_TODO:
+        case COMPLETE_TODO:
+        case EDIT_COMMENT:
+            {
+                return action.payload
             }
 
-        }
-        case COMPLETE_TODO: {
-            return {
-                ...state,
-                complete: action.payload.value
-            }
-        }
-        case EDIT_COMMENT: {
-            return {
-                ...state,
-                valueComment: action.payload.value
-            }
-        }
         default: {
             return state
         }

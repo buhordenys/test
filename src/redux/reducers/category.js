@@ -27,11 +27,11 @@ export default function categories(state = initialState, action) {
         case DELETE_CATEGORY: {
             return {
                 ...state,
+                selectedCategory: stateIdNewCategory,
                 categories: state.categories.filter(note => note.id !== state.selectedCategory)
             }
         }
         case CHANGE_CATEGORY: {
-            console.log(action.payload)
             return {
                 ...state,
                 selectedCategory: action.payload

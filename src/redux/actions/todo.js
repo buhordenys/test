@@ -10,23 +10,32 @@ export const EDIT_COMMENT = 'EDIT-COMMENT'
 export const DELETE_TODO = 'DELETE-TODO'
 
 export const addTodoAction = (value) => {
-    console.log(value)
     return (dispatch, getState) => {
         const state = getState()
         const  selectCategory = selectSelectedCategory(state)
-        console.log(state.todos, selectCategory)
 
-        return state.todos.forEach((stateTodos) => {
-            console.log(stateTodos.category, selectCategory)
+        const payload = state.todos.map((stateTodos) => {
             if (stateTodos.category === selectCategory) {
-                return (
-                    dispatch({
-                        type: ADD_TODO,
-                        payload: {stateTodos, value},
-                    })
-                )
+                return {
+                    ...stateTodos,
+                    todos: [
+                        ...stateTodos.todos,
+                        {
+                            id: uuidv4(),
+                            title: value,
+                            complete: false,
+                            valueComment: ''
+                        }
+                    ]
+                }
+
             }
-            //todo return - ?
+            return stateTodos
+        })
+
+        dispatch({
+            type: ADD_TODO,
+            payload: payload,
         })
     }
 };
@@ -36,18 +45,28 @@ export const changeTodo = (value, id) => {
         const state = getState()
         const selectCategory = selectSelectedCategory(state)
 
-        return state.todos.map((stateTodos) => {
+        const payload = state.todos.map((stateTodos) => {
             if (stateTodos.category === selectCategory) {
-                return stateTodos.todos.map((todo) => {
-                    if (todo.id === id) (
-                        dispatch({
-                            type: CHANGE_TODO,
-                            payload: value,
-                        })
-                    )
-                })
+                return {
+                    ...stateTodos,
+                    todos: stateTodos.todos.map((todo) => {
+                        if (todo.id === id) {
+                            return {
+                                ...todo,
+                                title: value
+                            }
+                        }
+                        return todo
+                    })
+                }
+
             }
-            //todo return - ?
+            return stateTodos
+        })
+
+        dispatch({
+            type: CHANGE_TODO,
+            payload: payload,
         })
     }
 };
@@ -57,15 +76,22 @@ export const deleteTodo = (id) => {
         const state = getState()
         const selectCategory = selectSelectedCategory(state)
 
-        return state.todos.map((stateTodos) => {
+        const payload = state.todos.map((stateTodos) => {
             if (stateTodos.category === selectCategory) {
-                dispatch({
-                    type: DELETE_TODO,
-                    payload: id,
-                })
+                return {
+                    ...stateTodos,
+                    todos: stateTodos.todos.filter((todo) => {
+                        return todo.id !== id
+                    })
+                }
             }
+            return stateTodos
         })
-            //todo return - ?
+
+        dispatch({
+            type: DELETE_TODO,
+            payload: payload,
+        })
     }
 };
 
@@ -75,18 +101,28 @@ export const completedTodo = (value, id) => {
         const state = getState()
         const selectCategory = selectSelectedCategory(state)
 
-        return state.todos.map((stateTodos) => {
+        const payload = state.todos.map((stateTodos) => {
             if (stateTodos.category === selectCategory) {
-                return stateTodos.todos.map((todo) => {
-                    if (todo.id === id) (
-                        dispatch({
-                            type: COMPLETE_TODO,
-                            payload: {value, id}
-                        })
-                    )
-                })
+                return {
+                    ...stateTodos,
+                    todos: stateTodos.todos.map((todo) => {
+                        if (todo.id === id) {
+                            return {
+                                ...todo,
+                                complete: value,
+                            }
+                        }
+                        return todo
+                    })
+                }
             }
-            //todo return - ?
+            return stateTodos
+        })
+
+
+        dispatch({
+            type: COMPLETE_TODO,
+            payload: payload,
         })
     }
 };
@@ -96,18 +132,27 @@ export const editComment = (value, id) => {
         const state = getState()
         const selectCategory = selectSelectedCategory(state)
 
-        return state.todos.map((stateTodos) => {
+        const payload = state.todos.map((stateTodos) => {
             if (stateTodos.category === selectCategory) {
-                return stateTodos.todos.map((todo) => {
-                    if (todo.id === id) (
-                        dispatch({
-                            type: EDIT_COMMENT,
-                            payload: {value, id}
-                        })
-                    )
-                })
+                return {
+                    ...stateTodos,
+                    todos: stateTodos.todos.map((todo) => {
+                        if (todo.id === id) {
+                            return {
+                                ...todo,
+                                valueComment: value,
+                            }
+                        }
+                        return todo
+                    })
+                }
             }
-            //todo return - ?
+            return stateTodos
+        })
+
+        dispatch({
+            type: EDIT_COMMENT,
+            payload: payload,
         })
     }
 };
