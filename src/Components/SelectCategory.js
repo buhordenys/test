@@ -16,64 +16,57 @@ const StyleButton = withStyles({
     }
 })(Button)
 
-class SelectCategory extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+const SelectCategory = (props) => {
 
-    addCategory = (event) => {
+    const addCategory = (event) => {
         const categoryId = event.target.value
         if (categoryId===stateIdNewCategory) {
             const newCat = prompt('Add your new Category: ')
-            this.props.addNewCategory(newCat)
+            props.addNewCategory(newCat)
         } else {
-            this.props.changeCategory(categoryId)
+            props.changeCategory(categoryId)
         }
     }
 
-    dellCategory = () => {
+    const dellCategory = () => {
         const question = window.confirm("Do you really wont delete category?")
         if (question) {
-            this.props.deleteCategory()
+            props.deleteCategory()
         }
     }
 
-    render() {
-        //console.log(this.props.categories.selectedCategory)
-        return (
-            <div>
-                <select
-                    value={this.props.selectedCategory.id}
-                    onChange={this.addCategory}
-                    className='selectCategory'
-                >
-                    {
-                        this.props.categories.map( (category) => {
-                                return (
-                                    <option
-                                        key={category.id + category.title}
-                                        value={category.id}
-                                    >
-                                        {category.title}
-                                    </option>
-                                )
-                            }
+    return (
+        <div>
+            <select
+                value={props.selectedCategory.id}
+                onChange={addCategory}
+                className='selectCategory'
+            >
+                {
+                    props.categories.map( (category) => {
+                        return (
+                            <option
+                                key={category.id + category.title}
+                                value={category.id}
+                            >
+                                {category.title}
+                            </option>
                         )
-                    }
-                </select>
-                <StyleButton
-                    className="edit"
-                    size="small"
-                    color="secondary"
-                    veriant="text"
-                    startIcon={<DeleteForeverTwoToneIcon fontSize="large"/>}
-                    onClick={this.dellCategory}
-                >this category
-                </StyleButton>
-
-            </div>
-        )
-    }
+                        }
+                    )
+                }
+            </select>
+            <StyleButton
+                className="edit"
+                size="small"
+                color="secondary"
+                veriant="text"
+                startIcon={<DeleteForeverTwoToneIcon fontSize="large"/>}
+                onClick={dellCategory}
+            >this category
+            </StyleButton>
+        </div>
+    )
 }
 
 const mapStateToProps = (state) => ({

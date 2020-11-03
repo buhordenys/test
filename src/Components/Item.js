@@ -7,7 +7,6 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
-import {selectComplete, selectId, selectTitle, selectCategoryTodos} from "../redux/selectors/todo";
 import {completedTodo, changeTodo, deleteTodo} from "../redux/actions/todo";
 
 
@@ -68,8 +67,7 @@ function Item(props) {
                             placeholder="You didn't input note"
                             multiline={true}
                             onClick={(event) => event.stopPropagation()}
-                            onChange={
-                                (event) => {
+                            onChange={(event) => {
                                     props.changeTodo(event.target.value, props.todo.id)
                                 }
                             }
@@ -89,6 +87,7 @@ function Item(props) {
     todo: selectCategoryTodos(state),
 })
 */
+
 const mapDispatchToProps = {
     changeTodo,
     completedTodo,
