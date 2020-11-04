@@ -1,45 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import {connect} from 'react-redux';
 import {addTodoAction} from '../redux/actions/todo'
 
-
+/*
 class InputTodo extends React.Component {
     constructor(props) {
         super(props);
         this.state = { value: '' }
-    }
+    }*/
 
-    onChange = (event) => {
-        this.setState(
-            { value: event.target.value }
-        )}
+const InputTodo = (props) => {
 
-    onClick = () => {
-        this.props.addTodoAction(this.state.value);
-        this.setState(
-            { value: '' }
-        )}
+    const [count, setCount] = useState('')
 
-    render() {
-        return(
-            <div className='formAddTodo'>
-                <input
-                    onChange={this.onChange}
-                    value={this.state.value}
-                    className='inputTodo'
-                />
-                <NoteAddIcon
-                    className='iconInputTodo'
-                    fontSize="small"
-                />
-                <button
-                    onClick={this.onClick}
-                    className='buttonAddTodo'
-                > ADD </button>
-            </div>
-        )
-    }
+    const onClick = () => {
+        props.addTodoAction(count)
+        return () => setCount('')
+        }
+
+    return (
+        <div className='formAddTodo'>
+            <input
+                onChange={(event) => setCount(event.target.value)}
+                value={count}
+                className='inputTodo'
+            />
+            <NoteAddIcon
+                className='iconInputTodo'
+                fontSize="small"
+            />
+            <button
+                onClick={onClick}
+                className='buttonAddTodo'
+            > ADD </button>
+        </div>
+    )
 }
 
 const mapDispatchToProps = { addTodoAction };
