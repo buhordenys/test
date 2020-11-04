@@ -12,18 +12,18 @@ class InputTodo extends React.Component {
 
 const InputTodo = (props) => {
 
-    const [count, setCount] = useState('')
+    const [valueInputNewTodo, setValueInputNewTodo] = useState('')
 
     const onClick = () => {
-        props.addTodoAction(count)
-        return () => setCount('')
+        props.addTodoAction(valueInputNewTodo)
+        return () => setValueInputNewTodo('')
         }
 
     return (
         <div className='formAddTodo'>
             <input
-                onChange={(event) => setCount(event.target.value)}
-                value={count}
+                onChange={(event) => setValueInputNewTodo(event.target.value)}
+                value={valueInputNewTodo}
                 className='inputTodo'
             />
             <NoteAddIcon
