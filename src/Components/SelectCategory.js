@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useCallback} from "react";
 import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
 import {withStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addNewCategory, deleteCategory, changeCategory} from "../redux/actions/category";
-import {selectSelectedCategoryTitle, selectSelectedCategoryFromList} from "../redux/selectors/category";
+import {selectSelectedCategoryFromList} from "../redux/selectors/category";
 import {stateIdNewCategory} from "../redux/reducers/category";
 
 
@@ -16,34 +16,42 @@ const StyleButton = withStyles({
     }
 })(Button)
 
-const SelectCategory = (props) => {
+const SelectCategory = () => {
+
+    const selectedCategory = useSelector((state) => selectSelectedCategoryFromList(state))
+    const categories = useSelector((state) => state.categories.categories)
+    const dispatch = useDispatch()
+
+    let addNewCategories = useCallback((value) => dispatch(addNewCategory(value)), [dispatch])
+    let deleteCategories = useCallback(() => dispatch(deleteCategory()), [])
+    let changeCategories = useCallback((categoryId) => dispatch(changeCategory(categoryId)), [dispatch])
 
     const addCategory = (event) => {
         const categoryId = event.target.value
         if (categoryId===stateIdNewCategory) {
             const newCat = prompt('Add your new Category: ')
-            props.addNewCategory(newCat)
+            addNewCategories(newCat)
         } else {
-            props.changeCategory(categoryId)
+            changeCategories(categoryId)
         }
     }
 
     const dellCategory = () => {
         const question = window.confirm("Do you really wont delete category?")
         if (question) {
-            props.deleteCategory()
+            deleteCategories()
         }
     }
 
     return (
         <div>
             <select
-                value={props.selectedCategory.id}
+                value={selectedCategory.id}
                 onChange={addCategory}
                 className='selectCategory'
             >
                 {
-                    props.categories.map( (category) => {
+                    categories.map( (category) => {
                         return (
                             <option
                                 key={category.id + category.title}
@@ -69,15 +77,4 @@ const SelectCategory = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    selectedCategory: selectSelectedCategoryFromList(state),
-    categories: state.categories.categories
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    addNewCategory: (value) => dispatch(addNewCategory(value)),
-    deleteCategory: () => dispatch(deleteCategory()),
-    changeCategory: (categoryId) => dispatch(changeCategory(categoryId)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectCategory);
+export default SelectCategory;

@@ -10,9 +10,10 @@ class InputTodo extends React.Component {
         this.state = { value: '' }
     }*/
 
-const InputTodo = (props) => {
+const useInputTodo = (props) => {
 
     const [valueInputNewTodo, setValueInputNewTodo] = useState('')
+
 
     const onClick = () => {
         props.addTodoAction(valueInputNewTodo)
@@ -40,4 +41,4 @@ const InputTodo = (props) => {
 
 const mapDispatchToProps = { addTodoAction };
 
-export default connect(() => ({}), mapDispatchToProps)(InputTodo);
+export default connect(() => ({}), mapDispatchToProps)(useInputTodo);

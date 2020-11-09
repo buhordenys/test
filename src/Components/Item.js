@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import TextAreaComment from "./TextAreaComment";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,7 +6,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {completedTodo, changeTodo, deleteTodo} from "../redux/actions/todo";
 
 
@@ -26,13 +26,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Item(props) {
-    const classes = useStyles();
+    const classes = useStyles()
+
+    const dispatch = useDispatch()
+
+    const change = useCallback((value, id) => dispatch(changeTodo(value, id)), [dispatch])
+    const completed = useCallback((value, id) => dispatch(completedTodo(value, id)), [dispatch])
+    const deleteItem = useCallback((id) => dispatch(deleteTodo(id)), [dispatch])
 
     const onCheckMark = (value, id) => {
         setTimeout( () => {
-            props.deleteTodo(id)
+            deleteItem(id)
         }, 5000)
-        return props.completedTodo(value, id)
+        return completed(value, id)
 
     }
 
@@ -68,7 +74,7 @@ function Item(props) {
                             multiline={true}
                             onClick={(event) => event.stopPropagation()}
                             onChange={(event) => {
-                                    props.changeTodo(event.target.value, props.todo.id)
+                                    change(event.target.value, props.todo.id)
                                 }
                             }
                             defaultValue={props.todo.title}
@@ -83,19 +89,21 @@ function Item(props) {
     )
 }
 
-/*const mapStateToProps = (state) => ({
-    todo: selectCategoryTodos(state),
-})
-*/
+export default Item;
 
+
+/*
 const mapDispatchToProps = {
     changeTodo,
     completedTodo,
     deleteTodo,
-}
+}*/
 
-export default connect( () => ({}), mapDispatchToProps)(Item);
 
+/*const mapStateToProps = (state) => ({
+    todo: selectCategoryTodos(state),
+})
+*/
 
 /*
 const styles = theme => ({
