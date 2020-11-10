@@ -22,9 +22,9 @@ const SelectCategory = () => {
     const categories = useSelector((state) => state.categories.categories)
     const dispatch = useDispatch()
 
-    let addNewCategories = useCallback((value) => dispatch(addNewCategory(value)), [dispatch])
-    let deleteCategories = useCallback(() => dispatch(deleteCategory()), [])
-    let changeCategories = useCallback((categoryId) => dispatch(changeCategory(categoryId)), [dispatch])
+    const addNewCategories = useCallback((value) => dispatch(addNewCategory(value)), [dispatch])
+    const deleteCategories = useCallback(() => dispatch(deleteCategory()), [])
+    const changeCategories = useCallback((categoryId) => dispatch(changeCategory(categoryId)), [dispatch])
 
     const addCategory = (event) => {
         const categoryId = event.target.value

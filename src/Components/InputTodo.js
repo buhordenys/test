@@ -17,7 +17,7 @@ const useInputTodo = (props) => {
 
     const onClick = () => {
         props.addTodoAction(valueInputNewTodo)
-        return () => setValueInputNewTodo('')
+        return setValueInputNewTodo('')
         }
 
     return (

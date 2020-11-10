@@ -1,17 +1,19 @@
 import React from "react";
 import InputTodo from "./InputTodo";
 import Item from "./Item";
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 import {selectCategoryTodos} from "../redux/selectors/todo";
 
 
-const Todos = (props) => {
+const Todos = () => {
+    const todos = useSelector((state) => selectCategoryTodos(state))
+
     return (
         <div>
             <InputTodo />
             <ul className='listUl'>
                 {
-                    props.todos?.map(todo => {
+                    todos?.map(todo => {
                         return <Item
                                 key={todo.id}
                                 todo={todo}
@@ -23,11 +25,7 @@ const Todos = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    todos: selectCategoryTodos(state),
-})
-
-export default connect(mapStateToProps)(Todos);
+export default Todos;
 
 /*
 
